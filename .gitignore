@@ -1,0 +1,39 @@
+# Dipendenze
+node_modules/
+
+# File di ambiente
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Build
+/dist
+/build
+
+# Log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor e sistema operativo
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Cache
+.cache/
+.parcel-cache/
+.next/
+out/
+coverage/
+*.tsbuildinfo
+
+# Temporary files
+tmp/
+temp/
