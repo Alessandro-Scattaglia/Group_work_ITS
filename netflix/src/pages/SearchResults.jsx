@@ -2,7 +2,7 @@ import { useSearchParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import SearchBar from "../components/SearchBar/SearchBar";
 
-const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 const ACCESS_TOKEN = import.meta.env.VITE_ACCESS_TOKEN;
 
 export default function SearchResults() {
