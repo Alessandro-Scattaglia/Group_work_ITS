@@ -1,20 +1,33 @@
 import "./styles.css";
-
-import { createBrowserRouter } from "react-router";
-import { RouterProvider } from "react-router/dom";
+import React from "react";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 
 
 import HomePage from "./pages/HomePage";
 import SearchResults from "./pages/SearchResults";
+import Navbar from "./components/Navbar/Navbar";
+
+function RootLayout() {
+  return (
+    <div>
+      <header>
+        <Navbar />
+      </header>
+      <main>
+        <Outlet />
+      </main>
+    </div>
+  );
+}
 
 const routes = createBrowserRouter([
   {
     path: "/",
-    Component: HomePage,
-  },
-  {
-    path: "/search",
-    Component: SearchResults,
+    element: <RootLayout />,
+    children: [
+      { path: "/", element: <HomePage /> },
+      { path: "/search", element: <SearchResults /> },
+    ],
   },
 ]);
 
