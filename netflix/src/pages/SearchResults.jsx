@@ -1,6 +1,5 @@
 import { useSearchParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import SearchBar from "../components/SearchBar/SearchBar";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const ACCESS_TOKEN = import.meta.env.VITE_ACCESS_TOKEN;
@@ -56,7 +55,7 @@ export default function SearchResults() {
             <Link to="/">← Torna alla home</Link>
             <h1>Risultati di ricerca</h1>
 
-            <SearchBar />
+
 
             {query ? (
                 <>

@@ -1,5 +1,3 @@
-
-
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -48,6 +46,11 @@
 .navbar-links .nav-link:hover,
 .navbar-links .nav-link:focus {
     color: var(--netflix-dark-red);
+}
+.search {
+    margin-left: auto;
+    margin-right: 20px;
+    cursor: pointer;
 }
 
 /* stile per l’icona utente */
