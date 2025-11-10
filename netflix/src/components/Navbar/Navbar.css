@@ -1,22 +1,27 @@
-
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
 .navbar {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     padding: 10px 40px;
-    max-width: 1440px;
-    width: 100%;
-    margin: 0 auto;
-    color: var(--netflix-white);
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    font-family: var(--nav-font);
+    background-color: black;
+    color: #FFFFFF;
     position: sticky;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    background-color: var(--netflix-black);
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    font-family: var(--nav-font);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    overflow-x: hidden;
 }
 
 .navbar-left {
@@ -24,35 +29,47 @@
     align-items: center;
 }
 
-.navbar-logo a {
-    font-size: 24px;
-    font-weight: bold;
-    color: var(--netflix-red);
-    text-decoration: none;
-    margin-right: 30px;
+.navbar-logo {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
 }
+
+.navbar-logo img {
+    width: 140px;
+    height: auto;
+}
+
+
 
 .navbar-links {
     display: flex;
+    flex: 1;
+    justify-content: flex-start;
+    white-space: nowrap;
 }
 
 .navbar-links .nav-link {
-    color: var(--netflix-white);
+    color: #FFFFFF;
     text-decoration: none;
-    margin: 0 12px;
+    margin: 0 8px;
     font-weight: bold;
     font-size: 14px;
-    transition: color 0.3s;
+    transition: color 0.3s ease;
 }
 
 .navbar-links .nav-link:hover,
 .navbar-links .nav-link:focus {
-    color: var(--netflix-dark-red);
+    color: #B20710;
 }
 
-/* stile per l’icona utente */
 .navbar-user {
-    color: red;
-    /* se vuoi, puoi aggiungere cursor: pointer; */
+    display: flex;
+    align-items: center;
     cursor: pointer;
+    color: #E50914;
+}
+
+.navbar-user:hover {
+    filter: brightness(1.2);
 }

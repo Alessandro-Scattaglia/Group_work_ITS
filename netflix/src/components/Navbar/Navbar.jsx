@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../Navbar/Navbar.css';
-import { UserCircleIcon } from '@phosphor-icons/react';
+import { UserCircle } from '@phosphor-icons/react';
 
 function Navbar() {
   return (
@@ -23,14 +23,18 @@ function Navbar() {
         </div>
       </div>
       <div className='navbar-user'>
-        <UserCircleIcon size={32} color="red" />
+        <UserCircle size={32} weight="bold" color="#E50914" />
       </div>
     </nav>
+
   );
 }
 
+
 const NavLink = ({ to, children }) => (
-  <Link to={to} className="nav-link">{children}</Link>
+  <Link to={to} className="nav-link">
+    {children}
+  </Link>
 );
 
 export default Navbar;
