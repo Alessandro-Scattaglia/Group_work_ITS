@@ -20,7 +20,7 @@ export default function SearchBar() {
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Cerca qualcosa..."
+                placeholder="Titoli, persone, generi"
             />
             <button type="submit">Cerca</button>
         </form>
