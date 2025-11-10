@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import "./SearcBar.css";
+import { MagnifyingGlassIcon } from "@phosphor-icons/react";
 
 export default function SearchBar() {
     const [query, setQuery] = useState("");
@@ -15,14 +16,20 @@ export default function SearchBar() {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input
-                type="text"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Titoli, persone, generi"
-            />
-            <button type="submit">Cerca</button>
-        </form>
+
+        <>
+            <div className="lente">
+                <MagnifyingGlassIcon size={32} weight="bold" />
+            </div>
+            <form onSubmit={handleSubmit}>
+                <input
+                    type="text"
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    placeholder="Titoli, persone, generi"
+                />
+                <button type="submit">Cerca</button>
+            </form>
+        </>
     );
 }
