@@ -2,6 +2,7 @@ import "./styles.css";
 import React from "react";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 
+
 import HomePage from "./pages/HomePage";
 import SearchResults from "./pages/SearchResults";
 import Navbar from "./components/Navbar/Navbar";
