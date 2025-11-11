@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../Navbar/Navbar.css';
 import { UserCircleIcon } from '@phosphor-icons/react';
+import SearchBar from "../SearchBar/SearchBar";
 
 function Navbar() {
   return (
@@ -22,8 +23,9 @@ function Navbar() {
           <NavLink to="/browse-by-languages">Sfoglia per lingue</NavLink>
         </div>
       </div>
+      <div className="search"><SearchBar /></div>
       <div className='navbar-user'>
-        <UserCircleIcon size={32} color="red" />
+        <UserCircleIcon size={32} weight='bold' color="#E50914" />
       </div>
     </nav>
   );
