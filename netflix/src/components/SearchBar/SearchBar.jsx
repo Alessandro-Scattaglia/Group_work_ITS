@@ -23,7 +23,7 @@ export default function SearchBar() {
             {!open && (
                 //lente iniziale
                 <div className="search-icon-only" onClick={() => setOpen(true)}>
-                    <MagnifyingGlassIcon size={32} weight="bold" />
+                    <MagnifyingGlassIcon size={24} weight="bold" />
                 </div>
             )}
 

@@ -25,6 +25,7 @@ html {
 body {
     margin: 0;
     font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    
 }
 
 /**
@@ -33,6 +34,7 @@ body {
 
 main {
     display: block;
+    
 }
 
 ::selection {

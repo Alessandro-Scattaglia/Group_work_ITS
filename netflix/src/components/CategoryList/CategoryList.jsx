@@ -1,15 +1,13 @@
-import { useState, useEffect } from "react";
+import "./CategoryList.css";
+import MovieRow from "../MovieRow/MovieRow";
 
-
-
-import "./CategoryList.css"
-/* const BASE_URL = import.meta.env.VITE_BASE_URL;
-const ACCESS_TOKEN = import.meta.env.VITE_ACCESS_TOKEN;
- */
 export default function CategoryList() {
-    
+  return (
+    <div className="category-list">
+      <MovieRow title="Film Popolari" endpoint="/movie/popular" />
+      <MovieRow title="Più votati" endpoint="/movie/top_rated" />
+      <MovieRow title="In Tendenza" endpoint="/trending/movie/week" />
 
-    return (
-        <h1>ciao</h1>
-    );
+    </div>
+  );
 }

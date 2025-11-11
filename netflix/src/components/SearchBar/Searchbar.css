@@ -34,7 +34,7 @@
   background: transparent;
   color: white;
   outline: none;
-  padding: 4px 8px;
+  padding: 4px 4px;
   opacity: 0;
   animation: fadeInInput 0.2s ease 0.15s forwards;
 }

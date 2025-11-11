@@ -25,7 +25,7 @@ function Navbar() {
       </div>
       <div className="search"><SearchBar /></div>
       <div className='navbar-user'>
-        <UserCircleIcon size={32} color="red" />
+        <UserCircleIcon size={32} weight='bold' color="#E50914" />
       </div>
     </nav>
   );

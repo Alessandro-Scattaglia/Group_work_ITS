@@ -1,6 +1,6 @@
 .banner-hero {
     position: relative;
-    height: 70vh;
+    height: calc(100vh - 62.12px);
     background-size: cover;
     background-position: center;
     color: white;
@@ -43,6 +43,7 @@
     text-overflow: ellipsis;
     margin-bottom: 1.5rem;
 }
+
 .banner-buttons {
     display: flex;
     gap: 1rem;
