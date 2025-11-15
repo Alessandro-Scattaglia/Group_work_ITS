@@ -84,3 +84,14 @@
 .navbar-user:hover {
     filter: brightness(1.2);
 }
+
+.search {
+    margin-left: auto;
+    margin-right: 20px;
+    cursor: pointer;
+    color: #E50914;
+}
+
+.navbar-user:hover {
+    filter: brightness(1.2);
+}
