@@ -49,6 +49,21 @@
     white-space: nowrap;
 }
 
+.navbar-links .badge{
+    background-color: #e50914;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 12px;
+    position: absolute;
+    top: -10px;
+    right: -20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .navbar-links .nav-link {
     color: #FFFFFF;
     text-decoration: none;
@@ -56,6 +71,9 @@
     font-weight: bold;
     font-size: 14px;
     transition: color 0.3s ease;
+    align-items: center;
+    position: relative;
+    display: flex;
 }
 
 .navbar-links .nav-link:hover,
