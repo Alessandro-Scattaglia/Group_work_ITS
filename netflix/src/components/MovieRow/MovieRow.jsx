@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { CaretLeftIcon, CaretRightIcon, Heart, } from "@phosphor-icons/react";
+import { CaretLeftIcon, CaretRightIcon, StarIcon, } from "@phosphor-icons/react";
 import "./MovieRow.css";
 import { useFavorites } from "../context/FavoritesContext";
 
@@ -59,7 +59,7 @@ export default function MovieRow({ title, endpoint }) {
                                             })
                                     }
                                 >
-                                    {isFav ? <Heart  weight="fill" size={24} color="#E50914" /> : <Heart size={24} />}
+                                    {isFav ? <StarIcon  weight="fill" size={24} color="#ffd700" /> : <StarIcon size={24} />}
                                 </button>
                             </div>
                         );

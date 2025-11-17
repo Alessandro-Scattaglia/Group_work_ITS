@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { useFavorites } from "../components/context/FavoritesContext";
-import { CaretLeftIcon, CaretRightIcon, Heart } from "@phosphor-icons/react";
+import { CaretLeftIcon, CaretRightIcon, StarIcon } from "@phosphor-icons/react";
 import "./FavoritesPage.css";
 
 export default function FavoritesPage() {
@@ -45,7 +45,7 @@ export default function FavoritesPage() {
                                     className="fav-btn"
                                     onClick={() => removeFavorite(movie.id)}
                                 >
-                                    <Heart weight="fill" size={24} color="#E50914" />
+                                    <StarIcon weight="fill" size={24} color="#ffd700" />
                                 </button>
                             </div>
                             <p>{movie.title}</p>
