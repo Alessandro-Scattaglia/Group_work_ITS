@@ -10,7 +10,7 @@ export default function BannerHero() {
     const [isFavorite, setIsFavorite] = useState(false);
 
     useEffect(() => {
-        fetch(`${BASE_URL}/movie/333339?language=it-IT`, {
+        fetch(`${BASE_URL}/movie/157336?language=it-IT`, {
             headers: {
                 Authorization: `Bearer ${ACCESS_TOKEN}`,
                 "Content-Type": "application/json"

@@ -19,7 +19,6 @@
     width: 100%;
     max-width: auto;
     margin: 0 auto;
-    font-family: var(--nav-font);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     overflow-x: hidden;
 }
@@ -49,7 +48,7 @@
     white-space: nowrap;
 }
 
-.navbar-links .badge{
+.navbar-links .badge {
     background-color: #e50914;
     color: white;
     font-size: 12px;
@@ -92,12 +91,6 @@
     filter: brightness(1.2);
 }
 
-.search {
-    margin-left: auto;
-    margin-right: 20px;
-    cursor: pointer;
-    color: #E50914;
-}
 
 .navbar-user:hover {
     filter: brightness(1.2);
@@ -108,6 +101,8 @@
     margin-right: 20px;
     cursor: pointer;
     color: #E50914;
+    margin-top: 5px;
+    
 }
 
 .navbar-user:hover {
