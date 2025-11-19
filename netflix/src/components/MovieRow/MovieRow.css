@@ -31,8 +31,6 @@ h2 {
     border: none;
     font-size: 4rem;
     cursor: pointer;
-    padding: 5px 10px;
-    border-radius: 50%;
     z-index: 1;
     transition: transform 0.2s ease;
 
@@ -52,7 +50,11 @@ h2 {
 }
 
 .movie-card {
+    position: relative;
     transition: transform 0.3s ease;
+}
+.movie-img{
+    border-radius: 10px;
 }
 
 .movie-card p {
@@ -64,7 +66,8 @@ h2 {
     transform: scale(1.03);
 
 }
-.fav-btn{
+
+.fav-btn {
     position: absolute;
     top: 8px;
     right: 8px;
@@ -79,7 +82,6 @@ h2 {
     z-index: 2;
 }
 
-.fav-btn:hover{
+.fav-btn:hover {
     transform: scale(1.2);
 }
-
