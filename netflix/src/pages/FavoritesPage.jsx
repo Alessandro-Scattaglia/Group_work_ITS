@@ -1,10 +1,15 @@
 import { useFavorites } from "../components/context/FavoritesContext";
 import { ArrowLeftIcon, StarIcon } from "@phosphor-icons/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./FavoritesPage.css";
 
 export default function FavoritesPage() {
     const { favorites, addFavorite, removeFavorite } = useFavorites();
+    const navigate = useNavigate();
+
+    const goToDetailPage = (movieId) => {
+        navigate(`/detail/${movieId}`);
+    };
 
     return (
         <div className="favorites-page">
@@ -16,7 +21,11 @@ export default function FavoritesPage() {
                         const isFav = favorites.some(f => f.id === movie.id);
 
                         return (
-                            <div key={movie.id} className="movie-card">
+                            <div
+                                key={movie.id}
+                                className="movie-card"
+                                onClick={() => goToDetailPage(movie.id)}
+                            >
                                 <img className="movie-img"
                                     src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
                                     alt={movie.title}
@@ -25,15 +34,16 @@ export default function FavoritesPage() {
 
                                 <button
                                     className={`fav-btn ${isFav ? "fav" : ""}`}
-                                    onClick={() =>
+                                    onClick={(e) => {
+                                        e.stopPropagation();
                                         isFav
                                             ? removeFavorite(movie.id)
                                             : addFavorite({
                                                 id: movie.id,
                                                 title: movie.title,
                                                 poster_path: movie.poster_path,
-                                            })
-                                    }
+                                            });
+                                    }}
                                 >
                                     {isFav ? <StarIcon weight="fill" size={24} color="#ffd700" /> : <StarIcon size={24} />}
                                 </button>

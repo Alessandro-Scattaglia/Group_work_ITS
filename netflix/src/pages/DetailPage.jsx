@@ -13,6 +13,7 @@ export default function DetailPage() {
     const [error, setError] = useState(null);
     const { addFavorite, removeFavorite, favorites } = useFavorites();
     const [isFavorite, setIsFavorite] = useState(false);
+    const [cast, setCast] = useState([]);
 
     useEffect(() => {
         async function fetchMovieDetails() {
@@ -30,12 +31,29 @@ export default function DetailPage() {
                 setMovie(data);
             } catch (err) {
                 setError(err.message);
-            } finally {
-                setLoading(false);
+            }
+        }
+
+        async function fetchMovieCast() {
+            try {
+                const response = await fetch(`${BASE_URL}/movie/${id}/credits?language=it-IT`, {
+                    headers: {
+                        Authorization: `Bearer ${ACCESS_TOKEN}`,
+                        "Content-Type": "application/json",
+                    },
+                });
+
+                if (!response.ok) throw new Error("Errore nel recupero del cast del film");
+
+                const data = await response.json();
+                setCast(data.cast.slice(0, 6)); // Mostra  primi 6 membri del cast
+            } catch (err) {
+                console.error("Errore nel recupero del cast:", err);
             }
         }
 
         fetchMovieDetails();
+        fetchMovieCast();
     }, [id]);
 
     useEffect(() => {
@@ -79,6 +97,7 @@ export default function DetailPage() {
                             />
                         </div>
 
+
                         <div className="movie-info">
                             <h1 className="movie-title">{movie.title}</h1>
 
@@ -96,9 +115,9 @@ export default function DetailPage() {
                                     {movie.runtime} min
                                 </span>
                             </div>
-
+                            <h3>Descrizione</h3>
                             <p className="movie-overview">
-                                <h3>Descrizione</h3>
+
                                 {movie.overview}
                             </p>
 
@@ -115,9 +134,35 @@ export default function DetailPage() {
                                 >
                                     <StarIcon size={32} color="#ffd700" weight={isFavorite ? "fill" : "regular"} />
                                 </button>
+
                             </div>
+
+                        </div>
+                        <div className="movie-cast">
+                            <h3>Cast</h3>
+                            {cast.length > 0 ? (
+                                <div className="movie-cast-grid">
+                                    {cast.map((member) => (
+                                        <div key={member.id} className="cast-member">
+                                            <img
+                                                src={
+                                                    member.profile_path
+                                                        ? `https://image.tmdb.org/t/p/w200${member.profile_path}`
+                                                        : "https://via.placeholder.com/100x150?text=No+Image"
+                                                }
+                                                alt={member.name}
+                                            />
+                                            <p>{member.name}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            ) : (
+                                <p>Caricamento cast...</p>
+                            )}
                         </div>
                     </div>
+
+
                 </div>
             )}
         </div>

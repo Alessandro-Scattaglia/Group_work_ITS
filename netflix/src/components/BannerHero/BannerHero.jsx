@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./BannerHero.css";
 import { StarIcon, PlayIcon, InfoIcon } from "@phosphor-icons/react";
 import { useFavorites } from "../context/FavoritesContext";
+import { useNavigate } from "react-router-dom";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const ACCESS_TOKEN = import.meta.env.VITE_ACCESS_TOKEN;
@@ -10,6 +11,7 @@ export default function BannerHero() {
     const [movie, setMovie] = useState(null);
     const [isFavorite, setIsFavorite] = useState(false);
     const { addFavorite, removeFavorite, favorites } = useFavorites();
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch(`${BASE_URL}/movie/157336?language=it-IT`, {
@@ -39,6 +41,12 @@ export default function BannerHero() {
         setIsFavorite(!isFavorite);
     };
 
+    const goToDetailPage = () => {
+        if (movie) {
+            navigate(`/detail/${movie.id}`);
+        }
+    };
+
     //gestione del loading
     if (!movie) return <p>Loading...</p>;
 
@@ -57,7 +65,7 @@ export default function BannerHero() {
                         <PlayIcon size={32} weight="fill" />
                         Riproduci
                     </button>
-                    <button className="banner-button info">
+                    <button className="banner-button info" onClick={goToDetailPage}>
                         <InfoIcon size={32} /> Altre info
                     </button>
                     <button
