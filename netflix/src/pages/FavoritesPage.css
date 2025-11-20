@@ -3,10 +3,12 @@
     color: #fff;
     font-size: 18px;
     margin-bottom: 20px;
-    display: inline-block;
+    margin-top: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
     transition: color 0.3s ease;
 }
-
 
 .home:hover {
     color: #B20710;
@@ -19,9 +21,11 @@
     gap: 20px;
     padding: 20px;
 }
+
 .favorites-grid .movie-card {
     width: 100%;
 }
+
 .favorites-grid .movie-card img {
     width: 100%;
     border-radius: 8px;

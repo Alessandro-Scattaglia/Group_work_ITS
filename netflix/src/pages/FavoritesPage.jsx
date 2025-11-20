@@ -8,7 +8,7 @@ export default function FavoritesPage() {
 
     return (
         <div className="favorites-page">
-            <Link to="/" className="home"><ArrowLeftIcon size={16}/> Torna alla home</Link>
+            <Link to="/" className="home"><ArrowLeftIcon weight="bold" size={16}/> Torna alla home</Link>
             <h1>I tuoi film preferiti</h1>
             {favorites.length > 0 ? (
                 <div className="favorites-grid">
@@ -42,7 +42,7 @@ export default function FavoritesPage() {
                     })}
                 </div>
             ) : (
-                <p>Non hai ancora aggiunto nessun preferito.</p>
+                <p>Non hai ancora aggiunto nessun film preferito.</p>
             )}
         </div>
     );

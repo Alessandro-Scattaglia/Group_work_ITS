@@ -64,7 +64,7 @@ export default function SearchResults() {
 
     return (
         <div>
-            <Link to="/" className="home"><ArrowLeftIcon size={16}/> Torna alla home</Link>
+            <Link to="/" className="home"><ArrowLeftIcon weight="bold" size={16}/> Torna alla home</Link>
             <h1 className="risultati">Risultati di ricerca</h1>
 
             {query ? (
