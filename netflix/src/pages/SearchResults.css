@@ -1,0 +1,21 @@
+.home {
+        text-decoration: none;
+        color: #fff;
+        font-size: 18px;
+        margin-bottom: 20px;
+        margin-top: 10px;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        transition: color 0.3s ease;
+    }
+
+    .home:hover {
+        color: #B20710; 
+    }
+
+.risultati {
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
+}

@@ -1,62 +1,59 @@
-import { useRef } from "react";
 import { useFavorites } from "../components/context/FavoritesContext";
-import { CaretLeftIcon, CaretRightIcon, StarIcon } from "@phosphor-icons/react";
+import { ArrowLeftIcon, StarIcon } from "@phosphor-icons/react";
+import { Link, useNavigate } from "react-router-dom";
 import "./FavoritesPage.css";
 
 export default function FavoritesPage() {
-    const { favorites, removeFavorite } = useFavorites();
-    const scrollRef = useRef(null);
+    const { favorites, addFavorite, removeFavorite } = useFavorites();
+    const navigate = useNavigate();
 
-    const scroll = (dir) => {
-        if (scrollRef.current) {
-            scrollRef.current.scrollBy({
-                left: dir === "left" ? -400 : 400,
-                behavior: "smooth",
-            });
-        }
+    const goToDetailPage = (movieId) => {
+        navigate(`/detail/${movieId}`);
     };
-
-    if (favorites.length === 0) {
-        return (
-            <div className="favorites-page">
-                <h2>I tuoi film preferiti</h2>
-                <p>Nessun film salvato al momento.</p>
-            </div>
-        );
-    }
 
     return (
         <div className="favorites-page">
-            <h2>I tuoi film preferiti</h2>
-            <div className="carousel-container">
-                <button className="arrow left" onClick={() => scroll("left")}>
-                    <CaretLeftIcon size={32} />
-                </button>
+            <Link to="/" className="home"><ArrowLeftIcon weight="bold" size={16}/> Torna alla home</Link>
+            <h1>I tuoi film preferiti</h1>
+            {favorites.length > 0 ? (
+                <div className="favorites-grid">
+                    {favorites.map((movie) => {
+                        const isFav = favorites.some(f => f.id === movie.id);
 
-                <div className="favorites-carousel" ref={scrollRef}>
-                    {favorites.map((movie) => (
-                        <div key={movie.id} className="movie-card">
-                            <img
-                                src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-                                alt={movie.title}
-                            />
-                            <div className="overlay">
+                        return (
+                            <div
+                                key={movie.id}
+                                className="movie-card"
+                                onClick={() => goToDetailPage(movie.id)}
+                            >
+                                <img className="movie-img"
+                                    src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                                    alt={movie.title}
+                                />
+                                <p>{movie.title}</p>
+
                                 <button
-                                    className="fav-btn"
-                                    onClick={() => removeFavorite(movie.id)}
+                                    className={`fav-btn ${isFav ? "fav" : ""}`}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        isFav
+                                            ? removeFavorite(movie.id)
+                                            : addFavorite({
+                                                id: movie.id,
+                                                title: movie.title,
+                                                poster_path: movie.poster_path,
+                                            });
+                                    }}
                                 >
-                                    <StarIcon weight="fill" size={24} color="#ffd700" />
+                                    {isFav ? <StarIcon weight="fill" size={24} color="#ffd700" /> : <StarIcon size={24} />}
                                 </button>
                             </div>
-                            <p>{movie.title}</p>
-                        </div>
-                    ))}
+                        );
+                    })}
                 </div>
-
-                <button className="arrow right" onClick={() => scroll("right")}>
-                    <CaretRightIcon size={32} />
-                </button>
-            </div>
+            ) : (
+                <p>Non hai ancora aggiunto nessun film preferito.</p>
+            )}
         </div>
     );
 }

@@ -2,23 +2,26 @@ import { useState, useEffect, useRef } from "react";
 import { CaretLeftIcon, CaretRightIcon, StarIcon, } from "@phosphor-icons/react";
 import "./MovieRow.css";
 import { useFavorites } from "../context/FavoritesContext";
+import { Link } from "react-router-dom";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const ACCESS_TOKEN = import.meta.env.VITE_ACCESS_TOKEN;
 
-export default function MovieRow({ title, endpoint }) {
-    const [movies, setMovies] = useState([]);
+export default function MovieRow({ title, endpoint, movies: propMovies }) {
+    const [movies, setMovies] = useState(propMovies || []);
     const scrollRef = useRef(null);
     const { favorites, addFavorite, removeFavorite } = useFavorites();
 
     useEffect(() => {
+        if (propMovies) return; // Usa i film passati come prop se disponibili
+
         fetch(`${BASE_URL}${endpoint}`, {
             headers: { Authorization: `Bearer ${ACCESS_TOKEN}` },
         })
             .then(res => res.json())
             .then(data => setMovies(data.results || []))
             .catch(err => console.error(`Errore nel fetch di ${title}:`, err));
-    }, [endpoint, title]);
+    }, [endpoint, propMovies]);
 
     const scroll = (dir) => {
         scrollRef.current?.scrollBy({
@@ -41,10 +44,12 @@ export default function MovieRow({ title, endpoint }) {
 
                         return (
                             <div key={movie.id} className="movie-card">
-                                <img
-                                    src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-                                    alt={movie.title}
-                                />
+                                <Link to={`/detail/${movie.id}`}>
+                                    <img className="movie-img"
+                                        src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                                        alt={movie.title}
+                                    />
+                                </Link>
                                 <p>{movie.title}</p>
 
                                 <button
@@ -59,7 +64,7 @@ export default function MovieRow({ title, endpoint }) {
                                             })
                                     }
                                 >
-                                    {isFav ? <StarIcon  weight="fill" size={24} color="#ffd700" /> : <StarIcon size={24} />}
+                                    {isFav ? <StarIcon weight="fill" size={24} color="#ffd700" /> : <StarIcon size={24} />}
                                 </button>
                             </div>
                         );
