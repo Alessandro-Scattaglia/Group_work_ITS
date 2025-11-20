@@ -20,7 +20,6 @@ export default function SearchResults() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    // Esegue la ricerca ogni volta che cambia la query
     useEffect(() => {
         if (!query) {
             setResults([]); // Resetta i risultati se la query è vuota

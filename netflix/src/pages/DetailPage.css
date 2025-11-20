@@ -125,33 +125,21 @@
 .movie-overview {
     font-size: 1rem;
     line-height: 1.6;
+    max-height: 125px;
+    overflow-y: auto;
+    margin-bottom: 1rem;
     color: #ddd;
     text-align: justify;
-    max-height: 200px;
-    overflow-y: auto;
     padding-right: 8px;
-
     scrollbar-width: thin;
     scrollbar-color: #555 transparent;
-}
-
-
-.favorite-container {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 1rem;
-}
-
-.favorite-text {
-    color: #ffd700;
-    font-size: 1rem;
 }
 
 .favorite-btn {
     background: none;
     border: none;
     cursor: pointer;
+    font-size: 0rem;
 }
 
 .back-home {
@@ -178,8 +166,8 @@
 .button-container {
     display: flex;
     justify-content: flex-start;
-    align-items: flex-end;
-    bottom: 1rem;
+
+
     padding: 0.5rem;
     border-radius: 5px;
 }
@@ -190,32 +178,7 @@ h3 {
     font-weight: bold;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .movie-content {
-        flex-direction: column;
-        padding: 2rem;
-        text-align: center;
-        justify-content: flex-end;
-    }
 
-    .movie-poster {
-        width: 200px;
-    }
-
-    .movie-title {
-        font-size: 2rem;
-    }
-
-    .movie-meta {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-
-    .movie-backdrop {
-        height: 60vh;
-    }
-}
 
 .movie-cast {
     margin-top: 2rem;
@@ -231,7 +194,7 @@ h3 {
 
 .movie-cast-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 1rem;
     justify-content: center;
 }

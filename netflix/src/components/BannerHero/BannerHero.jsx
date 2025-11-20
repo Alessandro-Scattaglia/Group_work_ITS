@@ -12,7 +12,7 @@ export default function BannerHero() {
     const [isFavorite, setIsFavorite] = useState(false);
     const { addFavorite, removeFavorite, favorites } = useFavorites();
     const navigate = useNavigate();
-
+    //recupero film da mostrare nel banner
     useEffect(() => {
         fetch(`${BASE_URL}/movie/157336?language=it-IT`, {
             headers: {
@@ -24,7 +24,7 @@ export default function BannerHero() {
             .then((data) => setMovie(data))
             .catch((err) => console.error(err));
     }, []);
-
+    //controllo se il film è nei preferiti
     useEffect(() => {
         if (movie) {
             const isFav = favorites.some((fav) => fav.id === movie.id);
@@ -32,6 +32,7 @@ export default function BannerHero() {
         }
     }, [movie, favorites]);
 
+    //funzione per aggiungere o rimuovere dai preferiti
     const toggleFavorite = () => {
         if (isFavorite) {
             removeFavorite(movie.id);

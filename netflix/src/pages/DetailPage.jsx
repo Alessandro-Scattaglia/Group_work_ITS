@@ -15,6 +15,9 @@ export default function DetailPage() {
     const [isFavorite, setIsFavorite] = useState(false);
     const [cast, setCast] = useState([]);
 
+
+
+    //recupero informazioni film e cast
     useEffect(() => {
         async function fetchMovieDetails() {
             try {
@@ -33,7 +36,7 @@ export default function DetailPage() {
                 setError(err.message);
             }
         }
-
+        //cast
         async function fetchMovieCast() {
             try {
                 const response = await fetch(`${BASE_URL}/movie/${id}/credits?language=it-IT`, {
@@ -46,7 +49,7 @@ export default function DetailPage() {
                 if (!response.ok) throw new Error("Errore nel recupero del cast del film");
 
                 const data = await response.json();
-                setCast(data.cast.slice(0, 6)); // Mostra  primi 6 membri del cast
+                setCast(data.cast.slice(0, 8)); // Mostra  primi 8 membri del cast
             } catch (err) {
                 console.error("Errore nel recupero del cast:", err);
             }
@@ -56,6 +59,7 @@ export default function DetailPage() {
         fetchMovieCast();
     }, [id]);
 
+    //gestione preferiti
     useEffect(() => {
         if (movie) {
             const isFav = favorites.some((fav) => fav.id === movie.id);
@@ -97,7 +101,7 @@ export default function DetailPage() {
                             />
                         </div>
 
-
+                        {/* MOVIE INFO */}
                         <div className="movie-info">
                             <h1 className="movie-title">{movie.title}</h1>
 
@@ -117,7 +121,6 @@ export default function DetailPage() {
                             </div>
                             <h3>Descrizione</h3>
                             <p className="movie-overview">
-
                                 {movie.overview}
                             </p>
 
@@ -138,6 +141,8 @@ export default function DetailPage() {
                             </div>
 
                         </div>
+
+                        {/* CAST */}
                         <div className="movie-cast">
                             <h3>Cast</h3>
                             {cast.length > 0 ? (
