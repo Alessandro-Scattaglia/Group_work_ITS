@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { CaretLeftIcon, CaretRightIcon, StarIcon, } from "@phosphor-icons/react";
 import "./MovieRow.css";
 import { useFavorites } from "../context/FavoritesContext";
+import { Link } from "react-router-dom";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const ACCESS_TOKEN = import.meta.env.VITE_ACCESS_TOKEN;
@@ -43,10 +44,12 @@ export default function MovieRow({ title, endpoint, movies: propMovies }) {
 
                         return (
                             <div key={movie.id} className="movie-card">
-                                <img className="movie-img"
-                                    src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-                                    alt={movie.title}
-                                />
+                                <Link to={`/detail/${movie.id}`}>
+                                    <img className="movie-img"
+                                        src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                                        alt={movie.title}
+                                    />
+                                </Link>
                                 <p>{movie.title}</p>
 
                                 <button

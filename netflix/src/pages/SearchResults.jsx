@@ -20,7 +20,6 @@ export default function SearchResults() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    // Esegue la ricerca ogni volta che cambia la query
     useEffect(() => {
         if (!query) {
             setResults([]); // Resetta i risultati se la query è vuota
@@ -64,7 +63,7 @@ export default function SearchResults() {
 
     return (
         <div>
-            <Link to="/" className="home"><ArrowLeftIcon size={16}/> Torna alla home</Link>
+            <Link to="/" className="home"><ArrowLeftIcon weight="bold" size={16}/> Torna alla home</Link>
             <h1 className="risultati">Risultati di ricerca</h1>
 
             {query ? (
