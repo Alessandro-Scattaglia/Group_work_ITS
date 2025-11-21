@@ -14,7 +14,7 @@ export default function BannerHero() {
     const navigate = useNavigate();
     //recupero film da mostrare nel banner
     useEffect(() => {
-        fetch(`${BASE_URL}/movie/157336?language=it-IT`, {
+        fetch(`${BASE_URL}/movie/157222?language=it-IT`, {
             headers: {
                 Authorization: `Bearer ${ACCESS_TOKEN}`,
                 "Content-Type": "application/json",
