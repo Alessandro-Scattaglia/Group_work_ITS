@@ -12,9 +12,10 @@ export default function BannerHero() {
     const [isFavorite, setIsFavorite] = useState(false);
     const { addFavorite, removeFavorite, favorites } = useFavorites();
     const navigate = useNavigate();
-    //recupero film da mostrare nel banner
+
+    //fetch a specific movie for the banner
     useEffect(() => {
-        fetch(`${BASE_URL}/movie/157222?language=it-IT`, {
+        fetch(`${BASE_URL}/movie/157336?language=it-IT`, {
             headers: {
                 Authorization: `Bearer ${ACCESS_TOKEN}`,
                 "Content-Type": "application/json",
@@ -24,15 +25,15 @@ export default function BannerHero() {
             .then((data) => setMovie(data))
             .catch((err) => console.error(err));
     }, []);
-    //controllo se il film è nei preferiti
+
+    // check if the movie is in favorites
     useEffect(() => {
         if (movie) {
-            const isFav = favorites.some((fav) => fav.id === movie.id);
-            setIsFavorite(isFav);
+            setIsFavorite(favorites.some((fav) => fav.id === movie.id));
         }
     }, [movie, favorites]);
 
-    //funzione per aggiungere o rimuovere dai preferiti
+    //add or remove the movie from favorites
     const toggleFavorite = () => {
         if (isFavorite) {
             removeFavorite(movie.id);
@@ -42,13 +43,11 @@ export default function BannerHero() {
         setIsFavorite(!isFavorite);
     };
 
+    //navigate to the movie detail page
     const goToDetailPage = () => {
-        if (movie) {
-            navigate(`/detail/${movie.id}`);
-        }
+        if (movie) navigate(`/detail/${movie.id}`);
     };
 
-    //gestione del loading
     if (!movie) return <p>Loading...</p>;
 
     return (

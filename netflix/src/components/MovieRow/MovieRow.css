@@ -2,7 +2,8 @@
   position: relative;
   display: flex;
   align-items: center;
-  z-index: 2; /* Mantieni il carosello sopra il contenuto */
+  z-index: 2;
+  /* Mantieni il carosello sopra il contenuto */
 }
 
 
@@ -37,11 +38,13 @@ h2 {
   cursor: pointer;
   z-index: 1;
   transition: transform 0.2s ease, opacity 0.3s ease;
-  opacity: 0; /* Invisibile di default */
+  opacity: 0;
+  /* Invisibile di default */
 }
 
 .carousel:hover .arrow {
-  opacity: 1; /* Visibile solo quando si passa con il mouse sul carosello */
+  opacity: 1;
+  /* Visibile solo quando si passa con il mouse sul carosello */
 }
 
 .arrow:hover {
@@ -64,9 +67,9 @@ h2 {
 }
 
 .movie-img {
-  height: 22rem; 
-  width: 14.5rem; 
-  object-fit: cover; 
+  height: 22rem;
+  width: 14.5rem;
+  object-fit: cover;
   border-radius: 1rem;
 }
 
@@ -98,5 +101,5 @@ h2 {
 }
 
 body {
-  margin-top: 4rem; 
+  margin-top: 4rem;
 }
