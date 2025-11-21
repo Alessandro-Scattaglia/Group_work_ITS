@@ -8,6 +8,7 @@ import SearchResults from "./pages/SearchResults";
 import Navbar from "./components/Navbar/Navbar";
 import FavoritesPage from "./pages/FavoritesPage";
 import DetailPage from "./pages/DetailPage";
+import NotFoundPage from "./pages/NotFoundPage";
 import { FavoritesProvider } from "./components/context/FavoritesContext";
 
 function RootLayout() {
@@ -34,6 +35,7 @@ const routes = createBrowserRouter([
       { path: "/search", element: <SearchResults /> },
       { path: "/favorites", element: <FavoritesPage/>},
       { path: "/detail/:id", element: <DetailPage /> },
+      { path: "*", element: <NotFoundPage /> },
     ],
   },
 ]);

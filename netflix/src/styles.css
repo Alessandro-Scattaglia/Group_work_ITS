@@ -13,6 +13,41 @@ html {
     /* 1 */
     -webkit-text-size-adjust: 100%;
     /* 2 */
+    /* Dimensione base - 16px è lo standard */
+    font-size: 16px;
+}
+
+/* Schermi molto grandi (PC fisso con risoluzione alta) */
+@media screen and (min-width: 1920px) {
+    html {
+        font-size: 18px;
+    }
+}
+
+/* Schermi grandi (monitor standard) */
+@media screen and (min-width: 1440px) and (max-width: 1919px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+/* Schermi medi (laptop) */
+@media screen and (min-width: 1024px) and (max-width: 1439px) {
+    html {
+        font-size: 15px;
+    }
+}
+
+/* Tablet */
+@media screen and (max-width: 1023px) {
+    html {
+        font-size: 14px;
+    }
+}
+
+/* Box-sizing per tutti gli elementi */
+*, *::before, *::after {
+    box-sizing: border-box;
 }
 
 /* Sections
