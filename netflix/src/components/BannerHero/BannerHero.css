@@ -11,7 +11,7 @@
   top: -64px;
 }
 
-/* overlay scuro */
+/* dark overlay  */
 .banner-hero::after {
   content: "";
   position: absolute;

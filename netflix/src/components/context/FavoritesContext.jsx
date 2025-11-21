@@ -1,28 +1,26 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext } from "react";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 const FavoritesContext = createContext();
 
 export function FavoritesProvider ({ children }) {
-    const [favorites, setFavorites] = useState(() => {
-        const saved = localStorage.getItem("favorites");
-        return saved ? JSON.parse(saved) : [];
-    });
+    // using the custom hook to manage favorites in localStorage
+    const [favorites, setFavorites] = useLocalStorage("favorites", []);
 
-    useEffect(() => {
-        localStorage.setItem("favorites", JSON.stringify(favorites));
-    }, [favorites]);
-
+    // add a new favorite if it doesn't already exist
     const addFavorite = (item) => {
         if (!favorites.find((f) => f.id === item.id)) {
             setFavorites([...favorites, item]);
         }
     };
 
+    // remove a favorite by its ID
     const removeFavorite = (id) => {
         setFavorites(favorites.filter((f) => f.id !== id ));
     };
 
     return (
+        // providing favorites and actions to the entire app
         <FavoritesContext.Provider
         value={{favorites, addFavorite, removeFavorite}}
         >
@@ -31,4 +29,5 @@ export function FavoritesProvider ({ children }) {
     );
 }
 
+//hook to access the FavoritesContext
 export const useFavorites = () => useContext(FavoritesContext);

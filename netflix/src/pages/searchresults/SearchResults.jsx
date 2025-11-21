@@ -14,7 +14,7 @@ const ACCESS_TOKEN = import.meta.env.VITE_ACCESS_TOKEN;
 
 export default function SearchResults() {
     const [searchParams] = useSearchParams();
-    const query = searchParams.get("q");
+    const query = searchParams.get("q"); // Get the search query from URL
 
     const [results, setResults] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -22,7 +22,7 @@ export default function SearchResults() {
 
     useEffect(() => {
         if (!query) {
-            setResults([]); // Resetta i risultati se la query è vuota
+            setResults([]); // Clear results if query is empty
             return;
         }
 
@@ -54,23 +54,20 @@ export default function SearchResults() {
         }
 
         fetchSearchResults();
-    }, [query]); // Aggiunto il listener per la query
-
-    useEffect(() => {
-        // Forza l'aggiornamento quando cambia la query
-        setResults([]);
-    }, [query]);
+    }, [query]); // Refetch results when query changes
 
     return (
         <div>
-            <Link to="/" className="home"><ArrowLeftIcon weight="bold" size={16}/> Torna alla home</Link>
+            <Link to="/" className="home">
+                <ArrowLeftIcon weight="bold" size={16} /> Torna alla home
+            </Link>
             <h1 className="risultati">Risultati di ricerca</h1>
 
             {query ? (
                 <>
-                    {/* gestione loading */}
                     {loading && <p>Caricamento...</p>}
-                    {error && <p style={{ color: "red" }}>Errore: {error}</p>}
+                    {/* Show loading state */}
+                    {error && <p style={{ color: "red" }}>Errore: {error}</p>} {/* Show error message */}
 
                     <div>
                         {results.length > 0 ? (
