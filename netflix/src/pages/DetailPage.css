@@ -51,8 +51,8 @@
 }
 
 .movie-poster {
-    width: 300px;
-    border-radius: 10px;
+    width: 18.75rem;
+    border-radius: 0.625rem;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
     transition: transform 0.3s ease;
 }
@@ -62,7 +62,7 @@
 }
 
 .movie-info {
-    max-width: 500px;
+    max-width: 31.25rem;
     text-align: left;
     display: flex;
     flex-direction: column;
@@ -125,12 +125,12 @@
 .movie-overview {
     font-size: 1rem;
     line-height: 1.6;
-    max-height: 125px;
+    max-height: 7.8125rem;
     overflow-y: auto;
     margin-bottom: 1rem;
     color: #ddd;
     text-align: justify;
-    padding-right: 8px;
+    padding-right: 0.5rem;
     scrollbar-width: thin;
     scrollbar-color: #555 transparent;
 }
@@ -144,16 +144,16 @@
 
 .back-home {
     position: absolute;
-    top: 20px;
-    left: 20px;
+    top: 1.25rem;
+    left: 1.25rem;
     text-decoration: none;
     color: #fff;
-    font-size: 18px;
-    margin-bottom: 20px;
-    margin-top: 10px;
+    font-size: 1.125rem;
+    margin-bottom: 1.25rem;
+    margin-top: 0.625rem;
     display: inline-flex;
     align-items: center;
-    gap: 4px;
+    gap: 0.25rem;
     transition: color 0.3s ease;
     z-index: 2;
 
@@ -205,9 +205,9 @@ h3 {
 }
 
 .cast-member img {
-    width: 100px;
-    height: 150px;
-    border-radius: 10px;
+    width: 6.25rem;
+    height: 9.375rem;
+    border-radius: 0.625rem;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
     margin-bottom: 0.5rem;
 }

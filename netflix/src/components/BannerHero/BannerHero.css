@@ -1,6 +1,6 @@
 .banner-hero {
     position: relative;
-    height: calc(100vh - 62.12px);
+    height: calc(100vh - 3.9rem);
     background-size: cover;
     background-position: center;
     color: white;
@@ -25,7 +25,7 @@
 .banner-content {
     position: relative;
     z-index: 2;
-    max-width: 600px;
+    max-width: 37.5rem;
     text-align: justify;
 }
 
@@ -38,7 +38,7 @@
 
 .banner-description {
     font-size: 1.1rem;
-    line-height: 1.4rem;
+    line-height: 1.5rem;
     max-height: auto;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -61,7 +61,7 @@
     transition: background 0.3s;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 0.5rem;
 }
 
 .banner-button.play {
@@ -93,11 +93,11 @@
     color: #ffd700;
     font-weight: bold;
     font-size: 1rem;
-    padding: 8px 14px;
+    padding: 0.5rem 0.875rem;
     border-radius: 999px;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 0.375rem;
     cursor: default;
     transition: transform 0.2s ease, background-color 0.3s ease;
 }
