@@ -21,12 +21,13 @@ export default function MovieRow({ title, endpoint, movies: propMovies }) {
             .then(res => res.json())
             .then(data => setMovies(data.results || []))
             .catch(err => console.error(`Errore nel fetch di ${title}:`, err));
-    }, [endpoint, propMovies]);
+    }, [endpoint, propMovies, title]);
 
     const scroll = (dir) => {
+        const scrollAmount = (scrollRef.current?.offsetWidth || 0) * 0.8; 
         scrollRef.current?.scrollBy({
-            left: dir === "left" ? -400 : 400,
-            behavior: "smooth",
+            left: dir === "left" ? -scrollAmount : scrollAmount,
+            behavior: "smooth", 
         });
     };
 

@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState} from "react";
 import { useNavigate } from "react-router";
 import "./Searchbar.css";
 import { MagnifyingGlassIcon } from "@phosphor-icons/react";
@@ -23,7 +23,7 @@ export default function SearchBar() {
             {!open && (
                 //lente iniziale
                 <div className="search-icon-only" onClick={() => setOpen(true)}>
-                    <MagnifyingGlassIcon size={24} weight="bold" />
+                    <MagnifyingGlassIcon size={28} weight="bold" />
                 </div>
             )}
 
@@ -31,7 +31,7 @@ export default function SearchBar() {
 
                 <form className="search-form" onSubmit={handleSubmit}>
                     <button type="button" className="search-icon-inside" onClick={() => setOpen(false)}>
-                        <MagnifyingGlassIcon size={24} weight="bold" />
+                        <MagnifyingGlassIcon size={28} weight="bold" />
                     </button>
                     <input
                         type="text"
