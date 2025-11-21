@@ -10,6 +10,7 @@ import FavoritesPage from "./pages/favoritespage/FavoritesPage";
 import DetailPage from "./pages/detailpage/DetailPage";
 import NotFoundPage from "./pages/notfoundpage/NotFoundPage";
 import { FavoritesProvider } from "./components/context/FavoritesContext";
+import MoviesPage from "./pages/moviespage/MoviesPage";
 
 function RootLayout() {
   return (
@@ -34,6 +35,7 @@ const routes = createBrowserRouter([
       { path: "/", element: <HomePage /> },
       { path: "/search", element: <SearchResults /> },
       { path: "/favorites", element: <FavoritesPage/>},
+      {path: "/movies", element: <MoviesPage />},
       { path: "/detail/:id", element: <DetailPage /> },
       { path: "*", element: <NotFoundPage /> },
     ],

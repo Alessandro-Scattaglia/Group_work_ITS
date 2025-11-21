@@ -7,25 +7,26 @@ import { Link } from "react-router-dom";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const ACCESS_TOKEN = import.meta.env.VITE_ACCESS_TOKEN;
 
-export default function MovieRow({ title, endpoint, movies: propMovies }) {
+export default function MovieRow({ title, endpoint, movies: propMovies, top10 = false }) {
   const [movies, setMovies] = useState(propMovies || []);
   const scrollRef = useRef(null);
   const { favorites, addFavorite, removeFavorite } = useFavorites();
 
-  //fetch movies if not passed as props
   useEffect(() => {
     if (propMovies) return;
-    //fetch movies from the provided endpoint
 
     fetch(`${BASE_URL}${endpoint}`, {
       headers: { Authorization: `Bearer ${ACCESS_TOKEN}` },
     })
       .then((res) => res.json())
-      .then((data) => setMovies(data.results || []))
+      .then((data) => {
+        let results = data.results || [];
+        if (top10) results = results.slice(0, 10);
+        setMovies(results);
+      })
       .catch((err) => console.error(`Error fetching ${title}:`, err));
-  }, [endpoint, propMovies, title]);
+  }, [endpoint, propMovies, title, top10]);
 
-  //fcroll the movie row left or right for the carousel
   const scroll = (dir) => {
     const scrollAmount = (scrollRef.current?.offsetWidth || 0) * 0.8;
     scrollRef.current?.scrollBy({
@@ -41,17 +42,56 @@ export default function MovieRow({ title, endpoint, movies: propMovies }) {
         <button className="arrow left" onClick={() => scroll("left")}>
           <CaretLeftIcon />
         </button>
-        
+
         <div className="movies-scroll" ref={scrollRef}>
-          {movies.map((movie) => {
+          {movies.map((movie, index) => {
             const isFav = favorites.some((f) => f.id === movie.id);
 
+            if (top10) {
+              return (
+                <div key={movie.id} className="top10-wrapper">
+                  <div className="top10-number">{index + 1}</div>
+
+                  <div className="movie-card">
+                    <Link to={`/detail/${movie.id}`}>
+                      <img
+                        className="movie-img"
+                        src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+                        alt={movie.title}
+                      />
+                    </Link>
+                    <p>{movie.title}</p>
+
+                    <button
+                      className={`fav-btn ${isFav ? "fav" : ""}`}
+                      onClick={() =>
+                        isFav
+                          ? removeFavorite(movie.id)
+                          : addFavorite({
+                              id: movie.id,
+                              title: movie.title,
+                              poster_path: movie.poster_path,
+                            })
+                      }
+                    >
+                      <StarIcon
+                        size={24}
+                        weight={isFav ? "fill" : "regular"}
+                        color={isFav ? "#ffd700" : undefined}
+                      />
+                    </button>
+                  </div>
+                </div>
+              );
+            }
+
+            // Carosello normale
             return (
               <div key={movie.id} className="movie-card">
                 <Link to={`/detail/${movie.id}`}>
                   <img
                     className="movie-img"
-                    src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                    src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
                     alt={movie.title}
                   />
                 </Link>
@@ -79,6 +119,7 @@ export default function MovieRow({ title, endpoint, movies: propMovies }) {
             );
           })}
         </div>
+
         <button className="arrow right" onClick={() => scroll("right")}>
           <CaretRightIcon />
         </button>
