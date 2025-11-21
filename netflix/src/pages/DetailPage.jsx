@@ -10,53 +10,48 @@ const ACCESS_TOKEN = import.meta.env.VITE_ACCESS_TOKEN;
 export default function DetailPage() {
     const { id } = useParams();
     const [movie, setMovie] = useState(null);
+    const [cast, setCast] = useState([]);
     const [error, setError] = useState(null);
     const { addFavorite, removeFavorite, favorites } = useFavorites();
     const [isFavorite, setIsFavorite] = useState(false);
-    const [cast, setCast] = useState([]);
 
-
-
-    //recupero informazioni film e cast
+    // Recupero film e cast
     useEffect(() => {
-        async function fetchMovieDetails() {
+        async function fetchMovieData() {
             try {
-                const response = await fetch(`${BASE_URL}/movie/${id}?language=it-IT`, {
-                    headers: {
-                        Authorization: `Bearer ${ACCESS_TOKEN}`,
-                        "Content-Type": "application/json",
-                    },
-                });
+                // Esegue entrambe le chiamate in parallelo
+                const [movieResponse, castResponse] = await Promise.all([
+                    fetch(`${BASE_URL}/movie/${id}?language=it-IT`, {
+                        headers: {
+                            Authorization: `Bearer ${ACCESS_TOKEN}`,
+                            "Content-Type": "application/json",
+                        },
+                    }),
+                    fetch(`${BASE_URL}/movie/${id}/credits?language=it-IT`, {
+                        headers: {
+                            Authorization: `Bearer ${ACCESS_TOKEN}`,
+                            "Content-Type": "application/json",
+                        },
+                    }),
+                ]);
 
-                if (!response.ok) throw new Error("Errore nel recupero dei dettagli del film");
+                if (!movieResponse.ok || !castResponse.ok) {
+                    throw new Error("Errore nel recupero dei dati del film");
+                }
 
-                const data = await response.json();
-                setMovie(data);
+                const [movieData, castData] = await Promise.all([
+                    movieResponse.json(),
+                    castResponse.json(),
+                ]);
+
+                setMovie(movieData);
+                setCast(castData.cast.slice(0, 8)); // Primi 8 membri del cast
             } catch (err) {
                 setError(err.message);
             }
         }
-        //cast
-        async function fetchMovieCast() {
-            try {
-                const response = await fetch(`${BASE_URL}/movie/${id}/credits?language=it-IT`, {
-                    headers: {
-                        Authorization: `Bearer ${ACCESS_TOKEN}`,
-                        "Content-Type": "application/json",
-                    },
-                });
 
-                if (!response.ok) throw new Error("Errore nel recupero del cast del film");
-
-                const data = await response.json();
-                setCast(data.cast.slice(0, 8)); // Mostra  primi 8 membri del cast
-            } catch (err) {
-                console.error("Errore nel recupero del cast:", err);
-            }
-        }
-
-        fetchMovieDetails();
-        fetchMovieCast();
+        fetchMovieData();
     }, [id]);
 
     //gestione preferiti
@@ -75,6 +70,20 @@ export default function DetailPage() {
         }
         setIsFavorite(!isFavorite);
     };
+
+    // Gestione errore
+    if (error) {
+        return (
+            <div className="detail-page">
+                <div style={{ textAlign: 'center', padding: '2rem', color: 'white' }}>
+                    <p>Errore: {error}</p>
+                    <Link to="/" className="back-home">
+                        <ArrowLeftIcon size={16} /> Torna alla home
+                    </Link>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="detail-page">
