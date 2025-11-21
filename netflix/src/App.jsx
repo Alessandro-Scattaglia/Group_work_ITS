@@ -3,12 +3,12 @@ import React from "react";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 
 
-import HomePage from "./pages/HomePage";
-import SearchResults from "./pages/SearchResults";
+import HomePage from "./pages/homepage/HomePage";
+import SearchResults from "./pages/searchresults/SearchResults";
 import Navbar from "./components/Navbar/Navbar";
-import FavoritesPage from "./pages/FavoritesPage";
-import DetailPage from "./pages/DetailPage";
-import NotFoundPage from "./pages/NotFoundPage";
+import FavoritesPage from "./pages/favoritespage/FavoritesPage";
+import DetailPage from "./pages/detailpage/DetailPage";
+import NotFoundPage from "./pages/notfoundpage/NotFoundPage";
 import { FavoritesProvider } from "./components/context/FavoritesContext";
 
 function RootLayout() {

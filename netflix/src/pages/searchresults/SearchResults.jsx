@@ -2,7 +2,7 @@ import { useSearchParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 
-import MovieRow from "../components/MovieRow/MovieRow";
+import MovieRow from "../../components/MovieRow/MovieRow";
 import { ArrowLeftIcon } from "@phosphor-icons/react";
 
 import "./SearchResults.css";

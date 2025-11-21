@@ -1,4 +1,4 @@
-import { useFavorites } from "../components/context/FavoritesContext";
+import { useFavorites } from "../../components/context/FavoritesContext";
 import { ArrowLeftIcon, StarIcon } from "@phosphor-icons/react";
 import { Link, useNavigate } from "react-router-dom";
 import "./FavoritesPage.css";

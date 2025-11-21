@@ -1,5 +1,5 @@
-import BannerHero from "../components/BannerHero/BannerHero";
-import CategoryList from "../components/CategoryList/CategoryList";
+import BannerHero from "../../components/BannerHero/BannerHero";
+import CategoryList from "../../components/CategoryList/CategoryList";
 import "./Homepage.css";
 
 export default function HomePage() {

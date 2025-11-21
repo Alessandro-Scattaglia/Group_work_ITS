@@ -1,7 +1,7 @@
 import { ArrowLeftIcon, StarIcon, PlayIcon } from "@phosphor-icons/react";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { useFavorites } from "../components/context/FavoritesContext";
+import { useFavorites } from "../../components/context/FavoritesContext";
 import "./DetailPage.css";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
