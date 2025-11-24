@@ -167,7 +167,6 @@
     display: block;
     color: black;
     margin-right: -50px;
-    -webkit-background-clip: unset;
     -webkit-text-fill-color: unset;
     -webkit-text-stroke: 4px rgba(199, 203, 209, 1);
     text-shadow: none;
