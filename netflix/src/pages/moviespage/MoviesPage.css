@@ -6,15 +6,15 @@
 }
 
 .home {
-  text-decoration: none;
-  color: #fff;
-  font-size: 1.125rem;
-  margin-bottom: 1.25rem;
-  margin-top: 0.625rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-  transition: color 0.3s ease;
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.125rem;
+    margin-bottom: 1.25rem;
+    margin-top: 0.625rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    transition: color 0.3s ease;
 }
 
 .page-title {
@@ -70,14 +70,16 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
 }
 
 .movie-card-grid img {
     width: 100%;
-    height: 300px;
+    height: 100%;
     object-fit: cover;
     border-radius: 8px;
     transition: transform 0.3s ease;
+    cursor: pointer;
 }
 
 .movie-card-grid img:hover {
@@ -86,9 +88,32 @@
 
 .movie-card-grid p {
     margin-top: 6px;
-    font-size: 14px;
+    font-size: 20px;
     text-align: center;
 }
+
+
+.fav-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.6);
+    border: none;
+    border-radius: 50%;
+    padding: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    color: white;
+    outline: none;
+}
+
+.fav-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+
+
 
 /* Carosello generico */
 .movie-row {
@@ -134,17 +159,17 @@
     align-items: flex-start;
     gap: 10px;
 }
+
 .top10-number {
     font-size: 280px;
     font-weight: 900;
     line-height: 1;
     display: block;
-    
-    color: rgba(255, 255, 255, 0.2);
-    filter: blur(0px);
-    
-    background: none;
+    color: black;
+    margin-right: -50px;
     -webkit-background-clip: unset;
     -webkit-text-fill-color: unset;
+    -webkit-text-stroke: 4px rgba(199, 203, 209, 1);
     text-shadow: none;
 }
+

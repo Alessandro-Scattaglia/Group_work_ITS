@@ -37,6 +37,7 @@
   width: 100%;
   object-fit: cover;
   border-radius: 1rem;
+  cursor: pointer;
 }
 
 .favorites-grid .movie-card .fav-btn {

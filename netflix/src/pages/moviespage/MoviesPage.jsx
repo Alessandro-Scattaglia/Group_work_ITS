@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import "./MoviesPage.css";
 import MovieRow from "../../components/MovieRow/MovieRow";
-import { ArrowLeftIcon } from "@phosphor-icons/react";
-import { Link } from "react-router-dom";
+import { ArrowLeftIcon, StarIcon } from "@phosphor-icons/react";
+import { Link, useNavigate } from "react-router-dom";
+import { useFavorites } from "../../components/context/FavoritesContext";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const ACCESS_TOKEN = import.meta.env.VITE_ACCESS_TOKEN;
@@ -10,6 +11,18 @@ const ACCESS_TOKEN = import.meta.env.VITE_ACCESS_TOKEN;
 export default function MoviesPage() {
     const [category, setCategory] = useState("all");
     const [categoryMovies, setCategoryMovies] = useState([]);
+
+    const { favorites, addFavorite, removeFavorite } = useFavorites();
+
+    const navigate = useNavigate();
+
+    const favoriteIds = useMemo(() => {
+        return favorites.map(fav => fav.id);
+    }, [favorites]);
+
+    const goToDetailPage = (id) => {
+        navigate(`/movie/${id}`);
+    };
 
     const categories = [
         { id: "all", label: "Tutti", endpoint: "/movie/popular" },
@@ -22,7 +35,6 @@ export default function MoviesPage() {
 
     const selectedCat = categories.find((c) => c.id === category);
 
-    // Fetch dei film della categoria selezionata
     useEffect(() => {
         if (category === "all") {
             setCategoryMovies([]);
@@ -44,7 +56,6 @@ export default function MoviesPage() {
             </Link>
             <h1 className="page-title"> Film</h1>
 
-            {/* Menu a tendina */}
             <div className="filter-container">
                 <label>Categorie:</label>
                 <select
@@ -60,22 +71,50 @@ export default function MoviesPage() {
                 </select>
             </div>
 
-            {/* Film della categoria selezionata */}
             {category !== "all" && categoryMovies.length > 0 && (
                 <div className="category-grid">
-                    {categoryMovies.map((movie) => (
-                        <div key={movie.id} className="movie-card-grid">
-                            <img
-                                src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-                                alt={movie.title}
-                            />
-                            <p>{movie.title}</p>
-                        </div>
-                    ))}
+                    {categoryMovies.map((movie) => {
+                        const isFav = favoriteIds.includes(movie.id);
+
+                        return (
+                            <div
+                                key={movie.id}
+                                className="movie-card-grid"
+                                onClick={() => goToDetailPage(movie.id)}
+                            >
+                                <button
+                                    className={`fav-btn ${isFav ? "fav" : ""}`}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        isFav
+                                            ? removeFavorite(movie.id)
+                                            : addFavorite({
+                                                id: movie.id,
+                                                title: movie.title,
+                                                poster_path: movie.poster_path,
+                                            });
+                                    }}
+                                >
+                                    <StarIcon
+                                        weight={isFav ? "fill" : "regular"}
+                                        size={24}
+                                        color={isFav ? "#ffd700" : undefined}
+                                    />
+                                </button>
+
+                                <img
+                                    className="movie-img"
+                                    src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+                                    alt={movie.title}
+                                />
+
+                                <p>{movie.title}</p>
+                            </div>
+                        );
+                    })}
                 </div>
             )}
 
-            {/* Caroselli fissi solo se nessuna categoria selezionata */}
             {category === "all" && (
                 <>
                     <MovieRow
