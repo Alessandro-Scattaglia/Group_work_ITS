@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const ACCESS_TOKEN = import.meta.env.VITE_ACCESS_TOKEN;
 
-export default function MovieRow({ title, endpoint, movies: propMovies, top10 = false }) {
+export default function MovieRow({ title, endpoint, movies: propMovies, type = "movie", top10 = false }) {
   const [movies, setMovies] = useState(propMovies || []);
   const scrollRef = useRef(null);
   const { favorites, addFavorite, removeFavorite } = useFavorites();
@@ -45,57 +45,17 @@ export default function MovieRow({ title, endpoint, movies: propMovies, top10 = 
 
         <div className="movies-scroll" ref={scrollRef}>
           {movies.map((movie, index) => {
-            const isFav = favorites.some((f) => f.id === movie.id);
-
-            if (top10) {
-              return (
-                <div key={movie.id} className="top10-wrapper">
-                  <div className="top10-number">{index + 1}</div>
-
-                  <div className="movie-card">
-                    <Link to={`/detail/${movie.id}`}>
-                      <img
-                        className="movie-img"
-                        src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
-                        alt={movie.title}
-                      />
-                    </Link>
-                    <p>{movie.title}</p>
-
-                    <button
-                      className={`fav-btn ${isFav ? "fav" : ""}`}
-                      onClick={() =>
-                        isFav
-                          ? removeFavorite(movie.id)
-                          : addFavorite({
-                              id: movie.id,
-                              title: movie.title,
-                              poster_path: movie.poster_path,
-                            })
-                      }
-                    >
-                      <StarIcon
-                        size={24}
-                        weight={isFav ? "fill" : "regular"}
-                        color={isFav ? "#ffd700" : undefined}
-                      />
-                    </button>
-                  </div>
-                </div>
-              );
-            }
-
-            // Carosello normale
+            const isFav = favorites.some(f => f.id === movie.id);
             return (
               <div key={movie.id} className="movie-card">
-                <Link to={`/detail/${movie.id}`}>
+                <Link to={`/${type}/${movie.id}`}>
                   <img
                     className="movie-img"
                     src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
-                    alt={movie.title}
+                    alt={movie.title || movie.name}
                   />
                 </Link>
-                <p>{movie.title}</p>
+                <p>{movie.title || movie.name}</p>
 
                 <button
                   className={`fav-btn ${isFav ? "fav" : ""}`}
@@ -104,7 +64,7 @@ export default function MovieRow({ title, endpoint, movies: propMovies, top10 = 
                       ? removeFavorite(movie.id)
                       : addFavorite({
                           id: movie.id,
-                          title: movie.title,
+                          title: movie.title || movie.name,
                           poster_path: movie.poster_path,
                         })
                   }

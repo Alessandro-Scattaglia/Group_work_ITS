@@ -45,7 +45,7 @@ export default function BannerHero() {
 
     //navigate to the movie detail page
     const goToDetailPage = () => {
-        if (movie) navigate(`/detail/${movie.id}`);
+        if (movie) navigate(`/movie/${movie.id}`);
     };
 
     if (!movie) return <p>Loading...</p>;

@@ -13,7 +13,7 @@ export default function FavoritesPage() {
   }, []);
 
   const goToDetailPage = (movieId) => {
-    navigate(`/detail/${movieId}`);
+    navigate(`/movie/${movieId}`);
   };
 
   return (
