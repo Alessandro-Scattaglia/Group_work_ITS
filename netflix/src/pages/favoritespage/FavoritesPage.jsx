@@ -5,10 +5,9 @@ import { Link, useNavigate } from "react-router-dom";
 import "./FavoritesPage.css";
 
 export default function FavoritesPage() {
-  const { favorites, addFavorite, removeFavorite } = useFavorites();
+  const { favorites, removeFavorite } = useFavorites();
   const navigate = useNavigate();
 
-  //scroll to top when the page loads
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -26,7 +25,7 @@ export default function FavoritesPage() {
       {favorites.length > 0 ? (
         <div className="favorites-grid">
           {favorites.map((movie) => {
-            const isFav = favorites.some((f) => f.id === movie.id);
+            const isFav = true;
 
             return (
               <div
@@ -36,28 +35,22 @@ export default function FavoritesPage() {
               >
                 <img
                   className="movie-img"
-                  src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                  src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
                   alt={movie.title}
                 />
                 <p>{movie.title}</p>
 
                 <button
-                  className={`fav-btn ${isFav ? "fav" : ""}`}
+                  className="fav-btn fav"
                   onClick={(e) => {
-                    e.stopPropagation(); // Prevent triggering the card click
-                    isFav
-                      ? removeFavorite(movie.id)
-                      : addFavorite({
-                          id: movie.id,
-                          title: movie.title,
-                          poster_path: movie.poster_path,
-                        });
+                    e.stopPropagation();
+                    removeFavorite(movie.id);
                   }}
                 >
                   <StarIcon
-                    weight={isFav ? "fill" : "regular"}
+                    weight="fill"
                     size={24}
-                    color={isFav ? "#ffd700" : undefined}
+                    color="#ffd700"
                   />
                 </button>
               </div>
