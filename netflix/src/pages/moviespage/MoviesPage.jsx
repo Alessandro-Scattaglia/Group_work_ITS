@@ -21,7 +21,7 @@ export default function MoviesPage() {
     }, [favorites]);
 
     const goToDetailPage = (id) => {
-        navigate(`/movie/${id}`);
+        navigate(`/detail/${id}`);
     };
 
     const categories = [

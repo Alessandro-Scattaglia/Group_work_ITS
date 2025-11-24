@@ -19,7 +19,7 @@
 
 .page-title {
     text-align: center;
-    font-size: 38px;
+    font-size: 2.5rem;
     margin-bottom: 30px;
     font-weight: 700;
 }
@@ -167,9 +167,7 @@
     display: block;
     color: black;
     margin-right: -50px;
-    -webkit-background-clip: unset;
     -webkit-text-fill-color: unset;
     -webkit-text-stroke: 4px rgba(199, 203, 209, 1);
     text-shadow: none;
 }
-
