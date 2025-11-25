@@ -10,7 +10,7 @@ export function FavoritesProvider ({ children }) {
     // add a new favorite if it doesn't already exist
     const addFavorite = (item) => {
         if (!favorites.find((f) => f.id === item.id)) {
-            setFavorites([...favorites, item]);
+            setFavorites([...favorites, { ...item, media_type: item.media_type }]);
         }
     };
 

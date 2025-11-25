@@ -12,8 +12,9 @@ export default function FavoritesPage() {
     window.scrollTo(0, 0);
   }, []);
 
-  const goToDetailPage = (movieId) => {
-    navigate(`/movie/${movieId}`);
+  const goToDetailPage = (item) => {
+    const type = item.media_type === "tv" ? "tv" : "movie"; // Determine type based on media_type
+    navigate(`/${type}/${item.id}`);
   };
 
   return (
@@ -24,27 +25,27 @@ export default function FavoritesPage() {
       <h1>I tuoi film preferiti</h1>
       {favorites.length > 0 ? (
         <div className="favorites-grid">
-          {favorites.map((movie) => {
+          {favorites.map((item) => {
             const isFav = true;
 
             return (
               <div
-                key={movie.id}
+                key={item.id}
                 className="movie-card"
-                onClick={() => goToDetailPage(movie.id)}
+                onClick={() => goToDetailPage(item)}
               >
                 <img
                   className="movie-img"
-                  src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
-                  alt={movie.title}
+                  src={`https://image.tmdb.org/t/p/original${item.poster_path}`}
+                  alt={item.title || item.name}
                 />
-                <p>{movie.title}</p>
+                <p>{item.title || item.name}</p>
 
                 <button
                   className="fav-btn fav"
                   onClick={(e) => {
                     e.stopPropagation();
-                    removeFavorite(movie.id);
+                    removeFavorite(item.id);
                   }}
                 >
                   <StarIcon

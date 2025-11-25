@@ -55,7 +55,8 @@ export default function DetailPage() {
 
     const toggleFavorite = () => {
         if (!item) return;
-        isFavorite ? removeFavorite(item.id) : addFavorite(item);
+        const favoriteItem = { ...item, media_type: type };
+        isFavorite ? removeFavorite(item.id) : addFavorite(favoriteItem);
         setIsFavorite(!isFavorite);
     };
 

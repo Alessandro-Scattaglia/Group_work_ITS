@@ -1,8 +1,8 @@
 .movies-page {
-    background: #000;
     min-height: 100vh;
     padding: 80px 20px 40px;
     color: white;
+    margin-top: -64px;
 }
 
 .home {

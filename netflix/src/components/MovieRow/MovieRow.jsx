@@ -66,6 +66,7 @@ export default function MovieRow({ title, endpoint, movies: propMovies, type = "
                           id: movie.id,
                           title: movie.title || movie.name,
                           poster_path: movie.poster_path,
+                          media_type: type, // Include media_type
                         })
                   }
                 >
