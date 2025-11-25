@@ -19,13 +19,13 @@ function Navbar() {
           <NavLink to="/" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
             Home
           </NavLink>
-          <NavLink to="/series" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+          <NavLink to="/tv" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
             Serie TV
           </NavLink>
           <NavLink to="/movies" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
             Film
           </NavLink>
-          <NavLink to="/favorites" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+          <NavLink to="/favourites" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
             Preferiti <span className="badge">{favorites.length}</span>
           </NavLink>
         </div>

@@ -31,20 +31,39 @@ export default function SearchResults() {
             setError(null);
 
             try {
-                const response = await fetch(
-                    `${BASE_URL}/search/movie?query=${encodeURIComponent(query)}&language=it-IT`,
-                    {
-                        headers: {
-                            Authorization: `Bearer ${ACCESS_TOKEN}`,
-                            "Content-Type": "application/json",
-                        },
-                    }
-                );
+                const [movieResponse, tvResponse] = await Promise.all([
+                    fetch(
+                        `${BASE_URL}/search/movie?query=${encodeURIComponent(query)}&language=it-IT`,
+                        {
+                            headers: {
+                                Authorization: `Bearer ${ACCESS_TOKEN}`,
+                                "Content-Type": "application/json",
+                            },
+                        }
+                    ),
+                    fetch(
+                        `${BASE_URL}/search/tv?query=${encodeURIComponent(query)}&language=it-IT`,
+                        {
+                            headers: {
+                                Authorization: `Bearer ${ACCESS_TOKEN}`,
+                                "Content-Type": "application/json",
+                            },
+                        }
+                    ),
+                ]);
 
-                if (!response.ok) throw new Error("Errore nella chiamata API");
+                if (!movieResponse.ok || !tvResponse.ok) {
+                    throw new Error("Errore nella chiamata API");
+                }
 
-                const data = await response.json();
-                setResults(data.results);
+                const movieData = await movieResponse.json();
+                const tvData = await tvResponse.json();
+
+                // Combine movie and TV results, adding a media_type field to distinguish them
+                const moviesWithType = movieData.results.map((movie) => ({ ...movie, media_type: "movie" }));
+                const tvWithType = tvData.results.map((tv) => ({ ...tv, media_type: "tv" }));
+
+                setResults([...moviesWithType, ...tvWithType]);
             } catch (err) {
                 console.error(err);
                 setError(err.message);
@@ -71,7 +90,14 @@ export default function SearchResults() {
 
                     <div>
                         {results.length > 0 ? (
-                            <MovieRow title={`Risultati per: ${query}`} movies={results} />
+                            <MovieRow
+                                title={`Risultati per: ${query}`}
+                                movies={results.map((item) => ({
+                                    ...item,
+                                    type: item.media_type, // aggiungo qui il type
+                                }))}
+                            />
+
                         ) : (
                             !loading && <p>Nessun risultato trovato.</p>
                         )}

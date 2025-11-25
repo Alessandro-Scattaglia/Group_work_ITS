@@ -1,0 +1,19 @@
+/* AboutPage.css */
+
+.about-page {
+  padding: 2rem;
+  color: #fff;
+  background-color: #141414;
+  text-align: center;
+}
+
+.about-page h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.about-page p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
