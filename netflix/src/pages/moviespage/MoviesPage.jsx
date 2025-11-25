@@ -118,12 +118,12 @@ export default function MoviesPage() {
             {category === "all" && (
                 <>
                     <MovieRow
-                        title="Popolari"
+                        title="Film Popolari"
                         endpoint="/movie/popular?language=it-IT"
                     />
 
                     <MovieRow
-                        title="Top 10 Italia"
+                        title="Film TV Più Votati"
                         endpoint="/movie/top_rated?language=it-IT"
                         top10={true}
                     />

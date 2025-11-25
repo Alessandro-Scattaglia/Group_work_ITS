@@ -35,17 +35,18 @@ export default function BannerHero() {
 
     //add or remove the movie from favorites
     const toggleFavorite = () => {
+        const favoriteItem = { ...movie, media_type: "movie" }; // Explicitly set media_type
         if (isFavorite) {
             removeFavorite(movie.id);
         } else {
-            addFavorite(movie);
+            addFavorite(favoriteItem);
         }
         setIsFavorite(!isFavorite);
     };
 
     //navigate to the movie detail page
     const goToDetailPage = () => {
-        if (movie) navigate(`/detail/${movie.id}`);
+        if (movie) navigate(`/movie/${movie.id}`);
     };
 
     if (!movie) return <p>Loading...</p>;
