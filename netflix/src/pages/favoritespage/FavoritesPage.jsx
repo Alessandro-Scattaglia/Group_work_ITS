@@ -13,7 +13,8 @@ export default function FavoritesPage() {
   }, []);
 
   const goToDetailPage = (item) => {
-    const type = item.media_type === "tv" ? "tv" : "movie"; // Determine type based on media_type
+    // Usa il tipo salvato, fallback a "movie"
+    const type = item.type || "movie";
     navigate(`/${type}/${item.id}`);
   };
 
@@ -22,12 +23,10 @@ export default function FavoritesPage() {
       <Link to="/" className="home">
         <ArrowLeftIcon weight="bold" size={16} /> Torna alla home
       </Link>
-      <h1>I tuoi film preferiti</h1>
+      <h1>I tuoi preferiti</h1>
       {favorites.length > 0 ? (
         <div className="favorites-grid">
           {favorites.map((item) => {
-            const isFav = true;
-
             return (
               <div
                 key={item.id}
@@ -48,18 +47,14 @@ export default function FavoritesPage() {
                     removeFavorite(item.id);
                   }}
                 >
-                  <StarIcon
-                    weight="fill"
-                    size={24}
-                    color="#ffd700"
-                  />
+                  <StarIcon weight="fill" size={24} color="#ffd700" />
                 </button>
               </div>
             );
           })}
         </div>
       ) : (
-        <p>Non hai ancora aggiunto nessun film preferito.</p>
+        <p>Non hai ancora aggiunto nessun film o serie preferita.</p>
       )}
     </div>
   );

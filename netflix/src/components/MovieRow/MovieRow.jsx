@@ -44,11 +44,15 @@ export default function MovieRow({ title, endpoint, movies: propMovies, type = "
         </button>
 
         <div className="movies-scroll" ref={scrollRef}>
-          {movies.map((movie, index) => {
+          {movies.map((movie) => {
             const isFav = favorites.some(f => f.id === movie.id);
+
+            // Usa sempre movie.type se esiste, altrimenti fallback al prop type
+            const movieType = movie.type || type;
+
             return (
               <div key={movie.id} className="movie-card">
-                <Link to={`/${type}/${movie.id}`}>
+                <Link to={`/${movieType}/${movie.id}`}>
                   <img
                     className="movie-img"
                     src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
@@ -66,7 +70,7 @@ export default function MovieRow({ title, endpoint, movies: propMovies, type = "
                           id: movie.id,
                           title: movie.title || movie.name,
                           poster_path: movie.poster_path,
-                          media_type: type, // Include media_type
+                          type: movieType, // Salva il tipo nei preferiti
                         })
                   }
                 >

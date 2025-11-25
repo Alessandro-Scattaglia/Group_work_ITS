@@ -10,7 +10,7 @@ const ACCESS_TOKEN = import.meta.env.VITE_ACCESS_TOKEN;
 export default function DetailPage() {
     const { id } = useParams();
     const { pathname } = useLocation();
-    const type = pathname.startsWith("/movie") ? "movie" : "tv"; // distinguo film/serie
+    const type = pathname.includes("/tv") ? "tv" : "movie"; // Ensure correct type is derived from URL
 
     const [item, setItem] = useState(null);
     const [cast, setCast] = useState([]);
@@ -21,6 +21,7 @@ export default function DetailPage() {
     useEffect(() => {
         async function fetchItemData() {
             try {
+                console.log(`Fetching details for ${type} with ID: ${id}`); // Log type and ID
                 const [itemRes, castRes] = await Promise.all([
                     fetch(`${BASE_URL}/${type}/${id}?language=it-IT`, {
                         headers: { Authorization: `Bearer ${ACCESS_TOKEN}` },
