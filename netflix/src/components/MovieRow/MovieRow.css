@@ -62,13 +62,18 @@ h2 {
 }
 
 .movie-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
   position: relative;
   transition: transform 0.3s ease;
 }
 
 .movie-img {
-  height: 22rem;
-  width: 14.5rem;
+  height: auto;
+  width: auto;
+  max-height: 22rem;
+  max-width: 14.5rem;
   object-fit: cover;
   border-radius: 1rem;
 }
@@ -102,4 +107,19 @@ h2 {
 
 body {
   margin-top: 4rem;
+}
+
+.top10-wrapper {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.top10-number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: black;
+    -webkit-text-stroke: 1px rgba(199, 203, 209, 1);
+    text-shadow: none;
 }
