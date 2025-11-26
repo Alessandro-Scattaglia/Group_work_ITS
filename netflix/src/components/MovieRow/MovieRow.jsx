@@ -44,12 +44,49 @@ export default function MovieRow({ title, endpoint, movies: propMovies, type = "
         </button>
 
         <div className="movies-scroll" ref={scrollRef}>
-          {movies.map((movie) => {
+          {movies.map((movie, index) => {
             const isFav = favorites.some(f => f.id === movie.id);
-
-            // Usa sempre movie.type se esiste, altrimenti fallback al prop type
             const movieType = movie.type || type;
 
+            // Top 10 logic
+            if (top10) {
+              return (
+                <div key={movie.id} className="top10-wrapper">
+                  <div className="top10-number">{index + 1}</div>
+                  <div className="movie-card">
+                    <Link to={`/${movieType}/${movie.id}`}>
+                      <img
+                        className="movie-img"
+                        src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+                        alt={movie.title || movie.name}
+                      />
+                    </Link>
+                    <p>{movie.title || movie.name}</p>
+                    <button
+                      className={`fav-btn ${isFav ? "fav" : ""}`}
+                      onClick={() =>
+                        isFav
+                          ? removeFavorite(movie.id)
+                          : addFavorite({
+                            id: movie.id,
+                            title: movie.title || movie.name,
+                            poster_path: movie.poster_path,
+                            type: movieType,
+                          })
+                      }
+                    >
+                      <StarIcon
+                        size={24}
+                        weight={isFav ? "fill" : "regular"}
+                        color={isFav ? "#ffd700" : undefined}
+                      />
+                    </button>
+                  </div>
+                </div>
+              );
+            }
+
+            // Carosello normale
             return (
               <div key={movie.id} className="movie-card">
                 <Link to={`/${movieType}/${movie.id}`}>
@@ -60,18 +97,17 @@ export default function MovieRow({ title, endpoint, movies: propMovies, type = "
                   />
                 </Link>
                 <p>{movie.title || movie.name}</p>
-
                 <button
                   className={`fav-btn ${isFav ? "fav" : ""}`}
                   onClick={() =>
                     isFav
                       ? removeFavorite(movie.id)
                       : addFavorite({
-                          id: movie.id,
-                          title: movie.title || movie.name,
-                          poster_path: movie.poster_path,
-                          type: movieType, // Salva il tipo nei preferiti
-                        })
+                        id: movie.id,
+                        title: movie.title || movie.name,
+                        poster_path: movie.poster_path,
+                        type: movieType,
+                      })
                   }
                 >
                   <StarIcon

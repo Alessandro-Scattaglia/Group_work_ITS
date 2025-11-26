@@ -16,7 +16,7 @@ export default function FavoritesPage() {
     // Usa il tipo salvato, fallback a "movie"
     const type = item.type || "movie";
     navigate(`/${type}/${item.id}`);
-  };
+  };  
 
   return (
     <div className="favorites-page">

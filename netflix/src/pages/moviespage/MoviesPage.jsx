@@ -92,6 +92,7 @@ export default function MoviesPage() {
                                                 id: movie.id,
                                                 title: movie.title,
                                                 poster_path: movie.poster_path,
+                                                type: "movie",
                                             });
                                     }}
                                 >
@@ -118,12 +119,12 @@ export default function MoviesPage() {
             {category === "all" && (
                 <>
                     <MovieRow
-                        title="Film Popolari"
+                        title="Popolari"
                         endpoint="/movie/popular?language=it-IT"
                     />
 
                     <MovieRow
-                        title="Film TV Più Votati"
+                        title="Top 10 Italia"
                         endpoint="/movie/top_rated?language=it-IT"
                         top10={true}
                     />
