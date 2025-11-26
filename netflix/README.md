@@ -46,6 +46,26 @@ Abbiamo utilizzato la Context API per gestire lo stato globale, come la lista de
 - **Dipendenza da TMDB**: L'applicazione dipende dall'API di TMDB per i dati; eventuali problemi con l'API possono influire sul funzionamento.
 - **Ottimizzazione**: Non sono state implementate ottimizzazioni avanzate per le performance su larga scala.
 
+## Motivazione per Librerie Esterne Utilizzate
+- **@phosphor-icons/react**: Utilizzata per aggiungere icone moderne e leggere all'interfaccia utente, migliorando l'aspetto visivo senza appesantire il progetto.
+- **ESLint**: Implementata per garantire uno stile di codice coerente e prevenire errori comuni durante lo sviluppo.
+
+## Istruzioni per Contributi
+1. Forkare il repository.
+2. Creare un nuovo branch per le modifiche:
+   ```bash
+   git checkout -b nome-branch
+   ```
+3. Effettuare le modifiche e committare:
+   ```bash
+   git commit -m "Descrizione delle modifiche"
+   ```
+4. Pushare le modifiche:
+   ```bash
+   git push origin nome-branch
+   ```
+5. Creare una pull request descrivendo le modifiche apportate.
+
 ---
 Questo progetto è stato sviluppato come esercizio pratico per migliorare le competenze in React e nello sviluppo di applicazioni web moderne.
 

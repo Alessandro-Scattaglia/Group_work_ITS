@@ -8,6 +8,7 @@ export default function FavoritesPage() {
   const { favorites, removeFavorite } = useFavorites();
   const navigate = useNavigate();
 
+  //torna in cima alla pagina quando viene caricata
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);

@@ -9,17 +9,21 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 const ACCESS_TOKEN = import.meta.env.VITE_ACCESS_TOKEN;
 
 export default function MoviesPage() {
+
+    // Stato per la categoria selezionata
     const [category, setCategory] = useState("all");
     const [categoryMovies, setCategoryMovies] = useState([]);
 
     const { favorites, addFavorite, removeFavorite } = useFavorites();
 
+    // Hook per la navigazione
     const navigate = useNavigate();
 
     const favoriteIds = useMemo(() => {
         return favorites.map(fav => fav.id);
     }, [favorites]);
 
+    // Funzione per navigare alla pagina di dettaglio
     const goToDetailPage = (id) => {
         navigate(`/movie/${id}`);
     };
@@ -33,8 +37,10 @@ export default function MoviesPage() {
         { id: "drama", label: "Drammatico", endpoint: "/discover/movie?with_genres=18" },
     ];
 
+    // Trova la categoria selezionata
     const selectedCat = categories.find((c) => c.id === category);
 
+    // Effettua il fetch dei film quando la categoria cambia
     useEffect(() => {
         if (category === "all") {
             setCategoryMovies([]);
@@ -57,8 +63,10 @@ export default function MoviesPage() {
             <h1 className="page-title"> Film</h1>
 
             <div className="filter-container">
-                <label>Categorie:</label>
+                <label htmlFor="category-select">Categorie:</label>
                 <select
+                    id="category-select"
+                    name="category"
                     className="select-filter"
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
@@ -71,6 +79,7 @@ export default function MoviesPage() {
                 </select>
             </div>
 
+            {/*Mostra i film della categoria selezionata */}
             {category !== "all" && categoryMovies.length > 0 && (
                 <div className="category-grid">
                     {categoryMovies.map((movie) => {
@@ -116,6 +125,7 @@ export default function MoviesPage() {
                 </div>
             )}
 
+            {/* Mostra le righe di film popolari e top 10 se la categoria è "all" */}
             {category === "all" && (
                 <>
                     <MovieRow
@@ -126,6 +136,7 @@ export default function MoviesPage() {
                     <MovieRow
                         title="Top 10 Italia"
                         endpoint="/movie/top_rated?language=it-IT"
+                        /* mostra il carosello top 10 */
                         top10={true}
                     />
                 </>

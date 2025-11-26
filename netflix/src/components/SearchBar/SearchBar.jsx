@@ -4,30 +4,33 @@ import "./Searchbar.css";
 import { MagnifyingGlassIcon } from "@phosphor-icons/react";
 
 export default function SearchBar() {
-  const [open, setOpen] = useState(false); // tracks if the search bar is open
-  const [query, setQuery] = useState(""); // stores the search query
+  const [open, setOpen] = useState(false); //traccia se la barra di ricerca è aperta o chiusa
+  const [query, setQuery] = useState(""); // stato per memorizzare la query di ricerca
   const navigate = useNavigate();
 
-  //handles search submission
+  //gestisce l'invio della ricerca
   const handleSubmit = (e) => {
     e.preventDefault();
     if (query.trim()) {
-      navigate(`/search?q=${encodeURIComponent(query)}`); //navigate to search results
+      navigate(`/search?q=${encodeURIComponent(query)}`); //naviga alla pagina di ricerca con la query
       setQuery("");
-      setOpen(false); //close the search bar after submission
+      setOpen(false); //chiude la barra di ricerca dopo l'invio
     }
   };
 
   return (
     <div className="search-container">
       {!open ? (
-        //show search icon when the bar is closed
+        //mostra solo l'icona di ricerca quando la barra è chiusa
         <div className="search-icon-only" onClick={() => setOpen(true)}>
           <MagnifyingGlassIcon size={28} weight="bold" />
         </div>
       ) : (
-        //show input field when the bar is open
+        //mostra il modulo di ricerca quando è aperta
         <form className="search-form" onSubmit={handleSubmit}>
+          <label htmlFor="search-input" className="visually-hidden">
+            Cerca:
+          </label>
           <button
             type="button"
             className="search-icon-inside"
@@ -36,6 +39,8 @@ export default function SearchBar() {
             <MagnifyingGlassIcon size={28} weight="bold" />
           </button>
           <input
+            id="search-input"
+            name="search"
             type="text"
             autoFocus
             value={query}

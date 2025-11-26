@@ -4,24 +4,29 @@ import { Link, useParams, useLocation } from "react-router-dom";
 import { useFavorites } from "../../components/context/FavoritesContext";
 import "./DetailPage.css";
 
+// Recupera l'URL base e il token di accesso dall'ambiente
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const ACCESS_TOKEN = import.meta.env.VITE_ACCESS_TOKEN;
 
 export default function DetailPage() {
     const { id } = useParams();
     const { pathname } = useLocation();
-    const type = pathname.includes("/tv") ? "tv" : "movie"; // Ensure correct type is derived from URL
+    const type = pathname.includes("/tv") ? "tv" : "movie"; // Determina il tipo corretto (film o serie TV) in base all'URL
 
     const [item, setItem] = useState(null);
     const [cast, setCast] = useState([]);
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const { addFavorite, removeFavorite, favorites } = useFavorites();
     const [isFavorite, setIsFavorite] = useState(false);
 
     useEffect(() => {
         async function fetchItemData() {
+            setLoading(true);
+            setError(null);
+
+            // Effettua due chiamate API parallele per ottenere i dettagli del contenuto e il cast
             try {
-                console.log(`Fetching details for ${type} with ID: ${id}`); // Log type and ID
                 const [itemRes, castRes] = await Promise.all([
                     fetch(`${BASE_URL}/${type}/${id}?language=it-IT`, {
                         headers: { Authorization: `Bearer ${ACCESS_TOKEN}` },
@@ -41,13 +46,15 @@ export default function DetailPage() {
                 setCast(castData.cast?.slice(0, 8) || []);
             } catch (err) {
                 setError(err.message);
+            } finally {
+                setLoading(false);
             }
         }
 
         fetchItemData();
     }, [id, type]);
 
-    // gestione preferiti
+    // Gestione dei preferiti
     useEffect(() => {
         if (item) {
             setIsFavorite(favorites.some(fav => fav.id === item.id));
@@ -76,7 +83,9 @@ export default function DetailPage() {
 
     return (
         <div className="detail-page">
-            {item && (
+            {loading && <p>Caricamento in corso...</p>}
+            {error && <p className="error-message">{error}</p>}
+            {!loading && !error && item && (
                 <div className="movie-detail-container">
                     <Link to="/" className="back-home">
                         <ArrowLeftIcon size={16} /> Torna alla home
