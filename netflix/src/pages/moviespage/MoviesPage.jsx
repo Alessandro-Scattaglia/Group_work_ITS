@@ -92,6 +92,7 @@ export default function MoviesPage() {
                                                 id: movie.id,
                                                 title: movie.title,
                                                 poster_path: movie.poster_path,
+                                                type: "movie",
                                             });
                                     }}
                                 >

@@ -84,6 +84,7 @@ export default function SerieTvPage() {
                                                 id: series.id,
                                                 title: series.name || series.title,
                                                 poster_path: series.poster_path,
+                                                type: "tv",
                                             });
                                     }}
                                 >
