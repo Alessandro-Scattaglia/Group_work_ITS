@@ -4,6 +4,7 @@ import { ArrowLeftIcon, StarIcon } from "@phosphor-icons/react";
 import { Link, useNavigate } from "react-router-dom";
 import { useFavorites } from "../../components/context/FavoritesContext";
 
+// Recupera l'URL base e il token di accesso dall'ambiente
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const ACCESS_TOKEN = import.meta.env.VITE_ACCESS_TOKEN;
 
@@ -33,6 +34,7 @@ export default function SerieTvPage() {
             return;
         }
 
+        // Effettua una chiamata API per ottenere le serie TV in base alla categoria selezionata
         fetch(`${BASE_URL}${selectedCat.endpoint}`, {
             headers: { Authorization: `Bearer ${ACCESS_TOKEN}` },
         })
@@ -52,8 +54,10 @@ export default function SerieTvPage() {
             <h1 className="page-title">Serie TV</h1>
 
             <div className="filter-container">
-                <label>Categorie:</label>
+                <label htmlFor="category-select">Categorie:</label>
                 <select
+                    id="category-select"
+                    name="category"
                     className="select-filter"
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}

@@ -117,3 +117,44 @@
   color: #ffd700;
   font-size: 1.1rem;
 }
+
+/* Media queries for smaller screens */
+@media (max-width: 768px) {
+  .banner-hero {
+    padding: 1rem;
+    height: 90vh;
+    width: 85%;
+  }
+
+  .banner-title {
+    font-size: 2.5rem;
+    text-align: center;
+  }
+
+  .banner-description {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .banner-buttons {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .banner-button {
+    font-size: 0.9rem;
+    padding: 0.4rem 1.5rem;
+  }
+}
+
+/* Hover animations for buttons */
+.banner-button {
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.banner-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}

@@ -8,13 +8,14 @@ import { ArrowLeftIcon } from "@phosphor-icons/react";
 import "./SearchResults.css";
 
 
+// Recupera l'URL base e il token di accesso dall'ambiente
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const ACCESS_TOKEN = import.meta.env.VITE_ACCESS_TOKEN;
 
 
 export default function SearchResults() {
     const [searchParams] = useSearchParams();
-    const query = searchParams.get("q"); // Get the search query from URL
+    const query = searchParams.get("q"); // prende il parametro di ricerca "q"
 
     const [results, setResults] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -22,7 +23,7 @@ export default function SearchResults() {
 
     useEffect(() => {
         if (!query) {
-            setResults([]); // Clear results if query is empty
+            setResults([]); // pulisce i risultati se non c'è query
             return;
         }
 
@@ -30,6 +31,7 @@ export default function SearchResults() {
             setLoading(true);
             setError(null);
 
+            // Effettua due chiamate API in parallelo per film e serie TV
             try {
                 const [movieResponse, tvResponse] = await Promise.all([
                     fetch(
@@ -59,7 +61,7 @@ export default function SearchResults() {
                 const movieData = await movieResponse.json();
                 const tvData = await tvResponse.json();
 
-                // Combine movie and TV results, adding a media_type field to distinguish them
+                // Combina i risultati di film e serie TV, aggiungendo un campo media_type per distinguerli
                 const moviesWithType = movieData.results.map((movie) => ({ ...movie, media_type: "movie" }));
                 const tvWithType = tvData.results.map((tv) => ({ ...tv, media_type: "tv" }));
 
@@ -73,38 +75,44 @@ export default function SearchResults() {
         }
 
         fetchSearchResults();
-    }, [query]); // Refetch results when query changes
+    }, [query]); // aggiorna i risultati quando cambia la query
 
     return (
         <div>
-            <Link to="/" className="home">
-                <ArrowLeftIcon weight="bold" size={16} /> Torna alla home
-            </Link>
-            <h1 className="risultati">Risultati di ricerca</h1>
-
-            {query ? (
+            {loading && <p>Caricamento in corso...</p>}
+            {error && <p className="error-message">{error}</p>}
+            {!loading && !error && (
                 <>
-                    {loading && <p>Caricamento...</p>}
-                    {/* Show loading state */}
-                    {error && <p style={{ color: "red" }}>Errore: {error}</p>} {/* Show error message */}
+                    <Link to="/" className="home">
+                        <ArrowLeftIcon weight="bold" size={16} /> Torna alla home
+                    </Link>
+                    <h1 className="risultati">Risultati di ricerca</h1>
 
-                    <div>
-                        {results.length > 0 ? (
-                            <MovieRow
-                                title={`Risultati per: ${query}`}
-                                movies={results.map((item) => ({
-                                    ...item,
-                                    type: item.media_type, // aggiungo qui il type
-                                }))}
-                            />
+                    {query ? (
+                        <>
+                            {loading && <p>Caricamento...</p>}
+                            {/* Mostra lo stato di caricamento */}
+                            {error && <p style={{ color: "red" }}>Errore: {error}</p>} {/* Mostra il messaggio di errore */}
 
-                        ) : (
-                            !loading && <p>Nessun risultato trovato.</p>
-                        )}
-                    </div>
+                            <div>
+                                {results.length > 0 ? (
+                                    <MovieRow
+                                        title={`Risultati per: ${query}`}
+                                        movies={results.map((item) => ({
+                                            ...item,
+                                            type: item.media_type, // Aggiunge il tipo di media per ogni elemento
+                                        }))}
+                                    />
+
+                                ) : (
+                                    !loading && <p>Nessun risultato trovato.</p>
+                                )}
+                            </div>
+                        </>
+                    ) : (
+                        <p>Nessuna query di ricerca.</p>
+                    )}
                 </>
-            ) : (
-                <p>Nessuna query di ricerca.</p>
             )}
         </div>
     );

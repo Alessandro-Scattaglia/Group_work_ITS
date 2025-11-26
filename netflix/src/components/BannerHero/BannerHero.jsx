@@ -4,6 +4,7 @@ import { StarIcon, PlayIcon, InfoIcon } from "@phosphor-icons/react";
 import { useFavorites } from "../context/FavoritesContext";
 import { useNavigate } from "react-router-dom";
 
+//utikizza variabili d'ambiente per la configurazione dell'API
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const ACCESS_TOKEN = import.meta.env.VITE_ACCESS_TOKEN;
 
@@ -13,7 +14,7 @@ export default function BannerHero() {
     const { addFavorite, removeFavorite, favorites } = useFavorites();
     const navigate = useNavigate();
 
-    //fetch a specific movie for the banner
+    //recupera un film specifico per il banner
     useEffect(() => {
         fetch(`${BASE_URL}/movie/157336?language=it-IT`, {
             headers: {
@@ -26,16 +27,16 @@ export default function BannerHero() {
             .catch((err) => console.error(err));
     }, []);
 
-    // check if the movie is in favorites
+    // controlla se il film è nei preferiti
     useEffect(() => {
         if (movie) {
             setIsFavorite(favorites.some((fav) => fav.id === movie.id));
         }
     }, [movie, favorites]);
 
-    //add or remove the movie from favorites
+    //aggiunge o rimuove il film dai preferiti
     const toggleFavorite = () => {
-        const favoriteItem = { ...movie, media_type: "movie" }; // Explicitly set media_type
+        const favoriteItem = { ...movie, media_type: "movie" }; //setta il tipo di media
         if (isFavorite) {
             removeFavorite(movie.id);
         } else {
@@ -44,11 +45,11 @@ export default function BannerHero() {
         setIsFavorite(!isFavorite);
     };
 
-    //navigate to the movie detail page
+    //porta alla pagina di dettaglio del film
     const goToDetailPage = () => {
         if (movie) navigate(`/movie/${movie.id}`);
     };
-
+    //gestione loading
     if (!movie) return <p>Loading...</p>;
 
     return (

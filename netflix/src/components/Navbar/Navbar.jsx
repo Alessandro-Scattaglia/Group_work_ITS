@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import '../Navbar/Navbar.css';
 import { UserCircleIcon } from '@phosphor-icons/react';
@@ -7,6 +7,13 @@ import SearchBar from "../SearchBar/SearchBar";
 
 function Navbar() {
   const { favorites } = useFavorites();
+  const [menuActive, setMenuActive] = useState(false);
+
+  //toggle menu per dispositivi mobili
+  const toggleMenu = () => {
+    setMenuActive(!menuActive);
+  };
+
   return (
     <nav className='navbar'>
       <div className='navbar-left'>
@@ -15,7 +22,11 @@ function Navbar() {
             <img src="/logo_esteso.svg" alt="Logo esteso" />
           </NavLink>
         </div>
-        <div className='navbar-links'>
+        {/* menu hamburger */}
+        <button className='hamburger' onClick={toggleMenu}>
+          ☰
+        </button>
+        <div className={`navbar-links ${menuActive ? 'active' : ''}`}>
           <NavLink to="/" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
             Home
           </NavLink>
@@ -35,7 +46,6 @@ function Navbar() {
         <UserCircleIcon size={32} weight='bold' color="#E50914" />
       </div>
     </nav>
-
   );
 }
 

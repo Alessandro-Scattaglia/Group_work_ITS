@@ -4,23 +4,23 @@ import useLocalStorage from "../../hooks/useLocalStorage";
 const FavoritesContext = createContext();
 
 export function FavoritesProvider ({ children }) {
-    // using the custom hook to manage favorites in localStorage
+    // utilizzo di un hook personalizzato per gestire lo stato dei preferiti con localStorage
     const [favorites, setFavorites] = useLocalStorage("favorites", []);
 
-    // add a new favorite if it doesn't already exist
+    // aggiunta un nuovo preferito se non esiste già
     const addFavorite = (item) => {
         if (!favorites.find((f) => f.id === item.id)) {
             setFavorites([...favorites, { ...item, media_type: item.media_type }]);
         }
     };
 
-    // remove a favorite by its ID
+    // rimuove un preferito per id
     const removeFavorite = (id) => {
         setFavorites(favorites.filter((f) => f.id !== id ));
     };
 
     return (
-        // providing favorites and actions to the entire app
+        // rendere i preferiti e le azioni disponibili in tutta l’app
         <FavoritesContext.Provider
         value={{favorites, addFavorite, removeFavorite}}
         >
@@ -29,5 +29,5 @@ export function FavoritesProvider ({ children }) {
     );
 }
 
-//hook to access the FavoritesContext
+// hook personalizzato per accedere al contesto dei preferiti
 export const useFavorites = () => useContext(FavoritesContext);
