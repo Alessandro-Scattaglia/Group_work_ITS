@@ -1,115 +1,162 @@
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 .navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 40px;
-    background-color: black;
-    color: #FFFFFF;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    width: 100%;
-    max-width: auto;
-    margin: 0 auto;
-    font-family: var(--nav-font);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    overflow-x: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.625rem 2.5rem;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(10px);
+
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s ease, backdrop-filter 0.3s ease, padding 0.3s ease;
 }
 
 .navbar-left {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .navbar-logo {
-    display: flex;
-    align-items: center;
-    margin-right: 20px;
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
 }
 
 .navbar-logo img {
-    width: 140px;
-    height: auto;
+  width: 8.75rem;
+  height: auto;
+}
+.navbar-user img {
+  width: 2rem;
+  height: 2rem;
 }
 
+.navbar-user:hover {
+  filter: brightness(1.2);
+}
 
+.navbar-user svg {
+  margin-left: 0.5rem;
+  color: white;
+}
 
 .navbar-links {
-    display: flex;
-    flex: 1;
-    justify-content: flex-start;
-    white-space: nowrap;
+  display: flex;
+  flex: 1;
+  justify-content: flex-start;
+  white-space: nowrap;
+  gap: 1rem;
 }
 
-.navbar-links .badge{
-    background-color: #e50914;
-    color: white;
-    font-size: 12px;
-    font-weight: bold;
-    padding: 2px 6px;
-    border-radius: 12px;
-    position: absolute;
-    top: -10px;
-    right: -20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.navbar-links .badge {
+  background-color: #e50914;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 12px;
+  position: absolute;
+  top: -10px;
+  right: -20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .navbar-links .nav-link {
-    color: #FFFFFF;
-    text-decoration: none;
-    margin: 0 8px;
-    font-weight: bold;
-    font-size: 14px;
-    transition: color 0.3s ease;
-    align-items: center;
-    position: relative;
-    display: flex;
+  color: #ffffff;
+  text-decoration: none;
+  margin: 0 0.5rem;
+  font-weight: bold;
+  font-size: 0.875rem;
+  transition: all 0.3s ease;
+  align-items: center;
+  position: relative;
+  display: flex;
+  padding-bottom: 0.25rem;
+  border-bottom: 2px solid transparent;
 }
 
 .navbar-links .nav-link:hover,
 .navbar-links .nav-link:focus {
-    color: #B20710;
+  color: #b20710;
+}
+
+.navbar-links .nav-link.active {
+  color: #e50914;
+  border-bottom: 2px solid #e50914;
 }
 
 .navbar-user {
-    display: flex;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: #e50914;
+}
+
+.navbar-user:hover {
+  filter: brightness(1.2);
+}
+
+.search {
+  margin-left: auto;
+  margin-right: 20px;
+  cursor: pointer;
+  color: white;
+  margin-top: 5px;
+}
+
+/* Media Queries for Navbar with Hamburger Menu */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 1rem;
+    width: 85%;
+  }
+
+  .navbar-links {
+    display: none; /* Hide links by default on mobile */
+    flex-direction: column;
     align-items: center;
+    gap: 1rem;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    padding: 1rem 0;
+  }
+
+  .navbar-links.active {
+    display: flex; /* Show links when active */
+  }
+
+  .hamburger {
+    display: block;
     cursor: pointer;
-    color: #E50914;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+  }
 }
 
-.navbar-user:hover {
-    filter: brightness(1.2);
-}
-
-.search {
-    margin-left: auto;
-    margin-right: 20px;
-    cursor: pointer;
-    color: #E50914;
-}
-
-.navbar-user:hover {
-    filter: brightness(1.2);
-}
-
-.search {
-    margin-left: auto;
-    margin-right: 20px;
-    cursor: pointer;
-    color: #E50914;
-}
-
-.navbar-user:hover {
-    filter: brightness(1.2);
+@media (min-width: 769px) {
+  .hamburger {
+    display: none; /* Hide hamburger menu on desktop */
+  }
 }

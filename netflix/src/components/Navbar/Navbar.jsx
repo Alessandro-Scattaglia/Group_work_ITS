@@ -1,41 +1,57 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import '../Navbar/Navbar.css';
 import { UserCircleIcon } from '@phosphor-icons/react';
-import { useFavorites } from '../context/FavoritesContext'; 
+import { useFavorites } from '../context/FavoritesContext';
 import SearchBar from "../SearchBar/SearchBar";
+import { CaretDownIcon } from '@phosphor-icons/react';
 
 function Navbar() {
-  const {favorites} = useFavorites();
+  const { favorites } = useFavorites();
+  const [menuActive, setMenuActive] = useState(false);
+
+  //toggle menu per dispositivi mobili
+  const toggleMenu = () => {
+    setMenuActive(!menuActive);
+  };
+
   return (
     <nav className='navbar'>
       <div className='navbar-left'>
         <div className='navbar-logo'>
-          <Link to="/">
+          <NavLink to="/">
             <img src="/logo_esteso.svg" alt="Logo esteso" />
-          </Link>
+          </NavLink>
         </div>
-        <div className='navbar-links'>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/series">Serie TV</NavLink>
-          <NavLink to="/movies">Film</NavLink>
-          <NavLink to="/favorites">Preferiti <span className="badge">{favorites.length}</span></NavLink>
+        {/* menu hamburger */}
+        <button className='hamburger' onClick={toggleMenu}>
+          ☰
+        </button>
+        <div className={`navbar-links ${menuActive ? 'active' : ''}`}>
+          <NavLink to="/" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+            Home
+          </NavLink>
+          <NavLink to="/tv" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+            Serie TV
+          </NavLink>
+          <NavLink to="/movies" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+            Film
+          </NavLink>
+          <NavLink to="/favourites" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+            Preferiti <span className="badge">{favorites.length}</span>
+          </NavLink>
+          <NavLink to="/about" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+            About
+          </NavLink>
         </div>
       </div>
       <div className="search"><SearchBar /></div>
       <div className='navbar-user'>
-        <UserCircleIcon size={32} weight='bold' color="#E50914" />
+        <img src={"/profile.jpg" || "/path/to/local/no-image.png"} alt="profile" />
+        <CaretDownIcon size={16} weight="bold" />
       </div>
     </nav>
-
   );
 }
-
-
-const NavLink = ({ to, children }) => (
-  <Link to={to} className="nav-link">
-    {children}
-  </Link>
-);
 
 export default Navbar;

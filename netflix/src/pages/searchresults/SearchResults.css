@@ -1,0 +1,22 @@
+.home {
+        text-decoration: none;
+        color: #fff;
+        font-size: 1.125rem;
+        margin-bottom: 1.25rem;
+        margin-top: 0.625rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+        transition: color 0.3s ease;
+    }
+
+    .home:hover {
+        color: #B20710; 
+    }
+
+.risultati {
+    margin-top: 0;
+    margin-bottom: 1.25rem;
+    text-align: center;
+    font-size: 2rem;
+}
