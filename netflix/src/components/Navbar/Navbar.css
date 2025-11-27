@@ -40,6 +40,19 @@
   width: 8.75rem;
   height: auto;
 }
+.navbar-user img {
+  width: 2rem;
+  height: 2rem;
+}
+
+.navbar-user:hover {
+  filter: brightness(1.2);
+}
+
+.navbar-user svg {
+  margin-left: 0.5rem;
+  color: white;
+}
 
 .navbar-links {
   display: flex;
@@ -98,20 +111,12 @@
   filter: brightness(1.2);
 }
 
-.navbar-user:hover {
-  filter: brightness(1.2);
-}
-
 .search {
   margin-left: auto;
   margin-right: 20px;
   cursor: pointer;
   color: white;
   margin-top: 5px;
-}
-
-.navbar-user:hover {
-  filter: brightness(1.2);
 }
 
 /* Media Queries for Navbar with Hamburger Menu */

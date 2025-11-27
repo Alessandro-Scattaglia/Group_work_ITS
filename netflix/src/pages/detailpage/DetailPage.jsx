@@ -92,7 +92,7 @@ export default function DetailPage() {
                     </Link>
                     <div className="movie-backdrop">
                         <img
-                            src={`https://image.tmdb.org/t/p/original${item.backdrop_path}`}
+                            src={item.backdrop_path ? `https://image.tmdb.org/t/p/original${item.backdrop_path}` : '/path/to/local/no-image.png'}
                             alt={item.title || item.name}
                             className="backdrop-image"
                         />
@@ -103,7 +103,7 @@ export default function DetailPage() {
                         <div className="movie-poster-section">
                             <img
                                 className="movie-poster"
-                                src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
+                                src={item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : '/path/to/local/no-image.png'}
                                 alt={item.title || item.name}
                             />
                         </div>

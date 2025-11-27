@@ -29,7 +29,6 @@ export default function SearchBar() {
         //mostra il modulo di ricerca quando è aperta
         <form className="search-form" onSubmit={handleSubmit}>
           <label htmlFor="search-input" className="visually-hidden">
-            Cerca:
           </label>
           <button
             type="button"

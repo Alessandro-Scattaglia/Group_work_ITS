@@ -75,7 +75,7 @@ export default function MovieRow({ title, endpoint, movies: propMovies, type = "
                         <Link to={`/${movieType}/${movie.id}`}>
                           <img
                             className="movie-img"
-                            src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+                            src={movie.poster_path ? `https://image.tmdb.org/t/p/w300${movie.poster_path}` : '/path/to/local/no-image.png'}
                             alt={movie.title || movie.name}
                           />
                         </Link>
@@ -110,7 +110,7 @@ export default function MovieRow({ title, endpoint, movies: propMovies, type = "
                     <Link to={`/${movieType}/${movie.id}`}>
                       <img
                         className="movie-img"
-                        src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+                        src={movie.poster_path ? `https://image.tmdb.org/t/p/w300${movie.poster_path}` : '/path/to/local/no-image.png'}
                         alt={movie.title || movie.name}
                       />
                     </Link>

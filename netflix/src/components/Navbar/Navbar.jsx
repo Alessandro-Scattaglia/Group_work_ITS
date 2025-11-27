@@ -4,6 +4,7 @@ import '../Navbar/Navbar.css';
 import { UserCircleIcon } from '@phosphor-icons/react';
 import { useFavorites } from '../context/FavoritesContext';
 import SearchBar from "../SearchBar/SearchBar";
+import { CaretDownIcon } from '@phosphor-icons/react';
 
 function Navbar() {
   const { favorites } = useFavorites();
@@ -43,7 +44,8 @@ function Navbar() {
       </div>
       <div className="search"><SearchBar /></div>
       <div className='navbar-user'>
-        <UserCircleIcon size={32} weight='bold' color="#E50914" />
+        <img src={"/profile.jpg" || "/path/to/local/no-image.png"} alt="profile" />
+        <CaretDownIcon size={16} weight="bold" />
       </div>
     </nav>
   );
