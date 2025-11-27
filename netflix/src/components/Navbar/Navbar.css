@@ -59,6 +59,7 @@
   flex: 1;
   justify-content: flex-start;
   white-space: nowrap;
+  gap: 1rem;
 }
 
 .navbar-links .badge {
