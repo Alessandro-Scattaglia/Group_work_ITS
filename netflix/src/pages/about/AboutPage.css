@@ -1,19 +1,227 @@
-/* AboutPage.css */
-
 .about-page {
-  padding: 2rem;
-  color: #fff;
-  background-color: #141414;
-  text-align: center;
+    background-color: #000000;
+    color: #f5f5f5;
+    min-height: 100vh;
+    padding: 100px 0;
+    font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
 }
 
-.about-page h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
+.about-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 4%;
 }
 
-.about-page p {
-  font-size: 1.2rem;
-  line-height: 1.6;
-  margin-bottom: 1rem;
+.about-header {
+    text-align: center;
+    margin-bottom: 60px;
+    padding-bottom: 30px;
+    border-bottom: 2px solid rgba(229, 9, 20, 0.5);
+}
+
+.about-header h1 {
+    font-size: 4rem;
+    color: #E50914;
+    margin-bottom: 15px;
+    font-weight: 900;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+.about-subtitle {
+    font-size: 1.3rem;
+    color: #cccccc;
+    font-weight: 300;
+}
+
+.about-section {
+    margin-bottom: 50px;
+    padding: 30px 0;
+    border-bottom: 1px solid #E50914;
+}
+
+.section-title {
+    font-size: 2.2rem;
+    color: #ffffff;
+    margin-bottom: 20px;
+    position: relative;
+    padding-left: 20px;
+    font-weight: 700;
+}
+
+.section-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 5px;
+    height: 90%;
+    background-color: #E50914;
+    border-radius: 2px;
+}
+
+.about-text {
+    font-size: 1.1rem;
+    color: #f5f5f5;
+    margin-bottom: 15px;
+}
+
+.features-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.feature-item {
+    display: flex;
+    align-items: flex-start;
+    background-color: #141414;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #333333;
+    transition: border-color 0.3s, transform 0.3s;
+}
+
+.feature-item:hover {
+    border-color: #E50914;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    margin-right: 20px;
+    line-height: 1;
+    color: #E50914;
+}
+
+.feature-item strong {
+    color: #ffffff;
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    display: block;
+    font-weight: 600;
+}
+
+.feature-item p {
+    font-size: 0.95rem;
+    color: #b3b3b3;
+    margin: 0;
+}
+
+.tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.tech-badge {
+    background-color: #E50914;
+    color: #ffffff;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.tech-badge:hover {
+    background-color: #ff4d4d;
+    cursor: default;
+}
+
+.credits-section {
+    text-align: center;
+    padding-top: 40px;
+    border-top: 1px solid #E50914;
+    margin-top: 50px;
+}
+
+.credits-title {
+    font-size: 1.8rem;
+    color: #ffffff;
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+.team-members {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 30px;
+}
+
+.team-member {
+    background-color: #141414;
+    padding: 15px 30px;
+    border-radius: 8px;
+    border: 1px solid #444444;
+    border-radius: 20px;
+}
+
+.team-member:hover {
+    border-color: #E50914;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+.member-name {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #f5f5f5;
+}
+
+.final-message {
+    font-size: 1rem;
+    margin-top: 15px;
+    color: #999999;
+}
+
+.final-message a,
+.github-link {
+    color: #E50914;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.final-message a:hover,
+.github-link:hover {
+    color: #ff4d4d;
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .about-header h1 {
+        font-size: 3rem;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    .features-list {
+        grid-template-columns: 1fr;
+    }
+
+    .feature-item {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .feature-icon {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .team-members {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
 }

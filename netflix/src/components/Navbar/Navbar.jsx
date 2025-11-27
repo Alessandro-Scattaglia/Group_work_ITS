@@ -40,6 +40,9 @@ function Navbar() {
           <NavLink to="/favourites" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
             Preferiti <span className="badge">{favorites.length}</span>
           </NavLink>
+          <NavLink to="/about" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+            About
+          </NavLink>
         </div>
       </div>
       <div className="search"><SearchBar /></div>
